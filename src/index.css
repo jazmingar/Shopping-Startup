@@ -1,0 +1,7 @@
+/* src/index.css */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0f172a; /* This is the slate-900 color */
+}
