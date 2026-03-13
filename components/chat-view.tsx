@@ -96,7 +96,7 @@ export function ChatView({
               </div>
               <h1 className={`mb-6 flex items-center justify-center gap-2 text-3xl font-medium ${textClass}`}>
                 <Sparkles className="h-7 w-7" />
-                Welcome, Jazmin
+                Welcome
               </h1>
               <ChatInput
                 onSubmit={onSendMessage}
