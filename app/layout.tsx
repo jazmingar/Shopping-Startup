@@ -1,7 +1,7 @@
 import { Providers } from "./providers"
 import "./globals.css"
 import { DM_Sans, DM_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/next"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
