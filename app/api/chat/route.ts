@@ -443,14 +443,18 @@ HARD REMINDER:
         (s: any) => s.key === "curated_looks"
       );
       if (curatedSection && "options" in curatedSection) {
-        const images = (curatedSection.options as any[]).map((option) =>
-          getImageForSlot(
+        const usedUrls: string[] = [];
+        const images = (curatedSection.options as any[]).map((option) => {
+          const url = getImageForSlot(
             resolvedIntent,
             userContext?.location,
             option.slot as 1 | 2 | 3,
-            option.imageHint
-          )
-        );
+            option.imageHint,
+            usedUrls
+          );
+          if (url) usedUrls.push(url);
+          return url;
+        });
         // Only attach if at least one slot has an image
         if (images.some((url: string) => url)) {
           inspirationImages = images;

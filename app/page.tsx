@@ -200,7 +200,7 @@ export default function Home() {
       setMessages((prev) => [...prev, {
         id: "error",
         role: "assistant",
-        content: "Ugh, my brain just glitched! Check your API key or balance, babe. ✨",
+        content: "Oops, something went wrong on my end — please try again!",
         timestamp: new Date(),
       }]);
     } finally {

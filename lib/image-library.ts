@@ -349,7 +349,8 @@ export function getImageForSlot(
   intent: Intent,
   location: string | null | undefined,
   slot: 1 | 2 | 3,
-  hint?: Partial<ImageHint>
+  hint?: Partial<ImageHint>,
+  excludeUrls: string[] = []
 ): string {
   const climate = inferClimate(location);
 
@@ -368,7 +369,7 @@ export function getImageForSlot(
   // Score 8 = climate match (4) + clothingType match (3) + aesthetic or colorStory match (1+).
   // Below this, the image won't match the text well enough to show.
   const MIN_SCORE = 8;
-  const best = scored[0];
-  if (!best || best.score < MIN_SCORE) return "";
+  const best = scored.find(({ score, img }) => score >= MIN_SCORE && !excludeUrls.includes(img.url));
+  if (!best) return "";
   return best.img.url;
 }
