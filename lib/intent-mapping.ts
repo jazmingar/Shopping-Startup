@@ -205,6 +205,7 @@ export function buildIntentPromptPack(args: {
     weather?: string;
     constraints?: string;
     closetNotes?: string;
+    styleProfile?: string;
   };
 }): { system: string; user: string; structure: IntentStructure; config: IntentPromptConfig } {
   // ✅ normalized controls
@@ -306,6 +307,7 @@ export function buildIntentPromptPack(args: {
     userContext?.weather ? `WEATHER: ${userContext.weather}` : "",
     userContext?.constraints ? `USER CONSTRAINTS: ${userContext.constraints}` : "",
     userContext?.closetNotes ? `CLOSET NOTES: ${userContext.closetNotes}` : "",
+    userContext?.styleProfile ? `USER STYLE PROFILE: ${userContext.styleProfile}` : "",
     "",
     "OUTPUT CONTRACT (REQUIRED):",
     `- responseType MUST be "${responseType}".`,

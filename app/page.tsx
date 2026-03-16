@@ -15,6 +15,13 @@ import {
   getCityAesthetic,
 } from "@/lib/location";
 import { fetchWeatherByCoords, fetchWeatherByLocation } from "@/lib/weather";
+import { Onboarding } from "@/components/onboarding";
+import {
+  hasCompletedOnboarding,
+  getStyleProfile,
+  formatStyleProfileForPrompt,
+  StyleProfile,
+} from "@/lib/style-profile";
 
 
 
@@ -30,6 +37,27 @@ export default function Home() {
 
   // Persona state
   const [selectedPersona, setSelectedPersona] = React.useState<PersonaId>("brutal-editor");
+
+  // Onboarding — shown on first visit, hidden once complete or skipped
+  const [showOnboarding, setShowOnboarding] = React.useState(false);
+  const [styleProfile, setStyleProfile] = React.useState<StyleProfile | null>(null);
+
+  React.useEffect(() => {
+    if (!hasCompletedOnboarding()) {
+      setShowOnboarding(true);
+    } else {
+      setStyleProfile(getStyleProfile());
+    }
+  }, []);
+
+  const handleOnboardingComplete = () => {
+    setStyleProfile(getStyleProfile());
+    setShowOnboarding(false);
+  };
+
+  const handleOnboardingSkip = () => {
+    setShowOnboarding(false);
+  };
 
   // Persistent user context — survives across turns so we don't re-ask things
   const [userIndustry, setUserIndustry] = React.useState<string | undefined>(undefined);
@@ -175,6 +203,8 @@ export default function Home() {
             weather: weather,
             // Persist answers from clarifying questions
             closetNotes: wasAskingForIndustry ? content : userIndustry,
+            // Style profile from onboarding
+            styleProfile: styleProfile ? formatStyleProfileForPrompt(styleProfile) : undefined,
           },
         }),
       });
@@ -246,6 +276,13 @@ export default function Home() {
 
 
   return (
+    <>
+    {showOnboarding && (
+      <Onboarding
+        onComplete={handleOnboardingComplete}
+        onSkip={handleOnboardingSkip}
+      />
+    )}
     <SidebarProvider defaultOpen={true}>
       <AppSidebar
         pinnedChats={pinnedChats}
@@ -268,5 +305,6 @@ export default function Home() {
           />
       </SidebarInset>
     </SidebarProvider>
+    </>
   );
 }
