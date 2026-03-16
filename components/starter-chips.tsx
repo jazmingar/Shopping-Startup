@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { Sparkles, Briefcase } from "lucide-react";
+import { Sparkles, Briefcase, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface StarterChip {
@@ -18,16 +18,22 @@ interface StarterChipsProps {
 
 const chips: StarterChip[] = [
   {
-    id: "today",
-    label: "What should I wear today?",
+    id: "dinner",
+    label: "Dinner tonight",
     icon: <Sparkles className="h-4 w-4" />,
-    prompt: "What should I wear today?",
+    prompt: "What should I wear to dinner?",
   },
   {
-    id: "selfie",
-    label: "What should I wear to work?",
+    id: "work",
+    label: "Work outfit",
     icon: <Briefcase className="h-4 w-4" />,
     prompt: "What should I wear to work?",
+  },
+  {
+    id: "wardrobe",
+    label: "Refresh my wardrobe",
+    icon: <ShoppingBag className="h-4 w-4" />,
+    prompt: "Help me figure out what's missing from my wardrobe",
   },
 ];
 

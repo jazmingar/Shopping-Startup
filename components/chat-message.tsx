@@ -166,6 +166,25 @@ function StructuredResponse({
           );
         }
 
+        if (section.key === "wardrobe_items" && "items" in section) {
+          return (
+            <React.Fragment key={idx}>
+              <div className="space-y-8">
+                {(section as any).items.map((item: any) => (
+                  <div key={item.slot} className="space-y-1.5">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                      Item {String(item.slot).padStart(2, "0")}
+                    </p>
+                    <h4 className="font-medium text-foreground">{item.name}</h4>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+              <hr className="border-border" />
+            </React.Fragment>
+          );
+        }
+
         if (section.key === "next_questions" && "content" in section && section.content.length > 0) {
           return (
             <div key={idx} className="space-y-2">

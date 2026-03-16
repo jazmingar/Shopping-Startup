@@ -8,7 +8,8 @@ export type SectionKey =
   | "outfit_storybook"
   | "style_notes"
   | "editors_note"
-  | "next_questions";
+  | "next_questions"
+  | "wardrobe_items";
 
 export type IntentSection = {
   key: SectionKey;
@@ -45,7 +46,7 @@ export type IntentStructure = {
    NEW: LLM OUTPUT CONTRACT (what the model must return)
    ========================================================= */
 
-export type ResponseType = "initial" | "followup" | "clarifying";
+export type ResponseType = "initial" | "followup" | "clarifying" | "wardrobe_gap";
 
 /**
  * Structured hint the LLM outputs per slot so the backend can look up
@@ -139,7 +140,26 @@ export type ClarifyingResponse = {
   sections: TextSection[]; // only intro + next_questions
 };
 
-export type LlmResponse = InitialResponse | FollowupResponse | ClarifyingResponse;
+export type WardrobeItem = {
+  slot: 1 | 2 | 3 | 4;
+  name: string;
+  description: string;
+  category: string;
+};
+
+export type WardrobeItemsSection = {
+  key: "wardrobe_items";
+  items: WardrobeItem[];
+};
+
+export type WardrobeGapResponse = {
+  responseType: "wardrobe_gap";
+  intent: Intent;
+  title: string;
+  sections: (TextSection | WardrobeItemsSection)[];
+};
+
+export type LlmResponse = InitialResponse | FollowupResponse | ClarifyingResponse | WardrobeGapResponse;
 
 /* =========================================================
    EXISTING: Intent definitions

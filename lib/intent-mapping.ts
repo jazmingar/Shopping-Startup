@@ -72,9 +72,9 @@ Always favor practicality and comfort over trend when there is a conflict.`,
 
   professional: {
     intentBias:
-      "Aim for polished, professional, and modern. Think tailored pieces and elevated basics that still feel stylish after-hours.",
+      "Tailor the formality to the industry. For tech/startup environments: jeans are the default bottom — dark wash, straight or slim fit. Pair with elevated basics like a clean white button-down, a fitted sweater, a structured crewneck, or a casual blazer over a tee. Avoid dress pants, pencil skirts, or anything that reads 'corporate office' — the vibe is sharp but relaxed. For finance, law, consulting, or corporate environments: lean into tailored trousers, blazers, and polished separates. For creative industries: allow more expression, texture, and personality while staying intentional. If industry is unknown, default to smart-casual elevated basics.",
     etiquetteAndDressCode:
-      "Avoid anything that reads too sheer, too short, or too tight unless the user explicitly wants that.",
+      "Match formality to the stated or inferred industry. Tech = jeans-appropriate, no dress pants. Corporate/law/finance = business formal or business casual, no jeans unless explicitly allowed. Avoid anything too sheer, too short, or too tight unless the user explicitly wants that.",
     followUpQuestionBank: [
       "What is your workplace dress code: corporate, tech, business casual?",
       "Are you doing a lot of video calls today, or are you mostly in-person?",
@@ -207,13 +207,19 @@ export function buildIntentPromptPack(args: {
     closetNotes?: string;
     styleProfile?: string;
   };
+  isWardrobeGap?: boolean;
+  isWardrobeGapFollowup?: boolean;
+  wardrobeGapShownItems?: string[];
 }): { system: string; user: string; structure: IntentStructure; config: IntentPromptConfig } {
   // ✅ normalized controls
   const mode: "initial" | "refine" = args.mode === "refine" ? "refine" : "initial";
   const refineScope: "one" | "all" = args.refineScope === "all" ? "all" : "one";
 
   // FE mode => output responseType
-  const responseType = mode === "refine" ? "followup" : "initial";
+  const isWardrobeGap = args.isWardrobeGap === true;
+  const isWardrobeGapFollowup = args.isWardrobeGapFollowup === true;
+  const wardrobeGapShownItems = args.wardrobeGapShownItems ?? [];
+  const responseType = isWardrobeGap ? "wardrobe_gap" : mode === "refine" ? "followup" : "initial";
   const followupFocusType: "refine_option" | "refine_all" =
     mode === "refine" && refineScope === "all" ? "refine_all" : "refine_option";
 
@@ -324,22 +330,89 @@ export function buildIntentPromptPack(args: {
     "- Only include bag/accessories if they materially improve the look; otherwise omit.",
     exclusionBlock ? `- ${exclusionBlock}` : "",
     "",
-    intent === "professional" && mode === "initial" && !userContext?.closetNotes
+    mode === "initial"
       ? [
-          "CLARIFYING STEP (professional only):",
-          "- Before showing looks, check if the user's message mentions their industry or dress code.",
-          "- Industry signals to look for: finance, banking, law, legal, consulting, corporate, tech, startup, software, creative, design, media, marketing, medical, healthcare, or any explicit dress code (business casual, formal, etc.).",
-          "- If NO industry signal is present: return responseType 'clarifying' with ONLY an intro section (1 sentence) and a next_questions section (ask their industry).",
-          "- If industry IS clear: proceed with a normal 'initial' response.",
+          "CLARIFYING STEP:",
+          "Before recommending outfits, assess whether the user's message contains enough context to give a relevant suggestion.",
           "",
-          "CLARIFYING RESPONSE SHAPE (use only if industry is unclear):",
+          "A prompt is VAGUE if it is missing BOTH: (1) a clear occasion, setting, or activity, AND (2) any detail that would meaningfully shape the outfit (venue, vibe, dress code, time of day).",
+          "Examples of VAGUE: 'What should I wear today?', 'Help me with an outfit', 'What should I wear to a party?', 'Help me figure out what's missing from my wardrobe'",
+          "Examples of NOT VAGUE: 'I have a dinner date at a nice restaurant', 'Birthday party at a karaoke bar tonight', 'Work outfit for my tech job'",
+          "",
+          "If the prompt is VAGUE:",
+          "- Return responseType 'clarifying' with ONLY an intro section (1 short sentence) and a next_questions section.",
+          "- Ask at most 2 questions. Combine them naturally into one conversational sentence.",
+          "- Ask only what would most change the recommendation (occasion/setting first, vibe/dress code second).",
+          "- WARDROBE GAP EXCEPTION: If the prompt is about what's missing from the wardrobe (e.g. 'what's missing from my wardrobe', 'help me figure out what's missing'), use this exact question: 'What area of your wardrobe feels most lacking — going out, date night, or work?'",
+          "",
+          "If the prompt is NOT VAGUE: proceed directly with a normal 'initial' response. Do NOT ask clarifying questions.",
+          "",
+          ...(intent === "professional" && !userContext?.closetNotes
+            ? [
+                "PROFESSIONAL INTENT EXTRA RULE:",
+                "- Also check if the user mentions their industry or dress code.",
+                "- Industry signals: finance, banking, law, consulting, corporate, tech, startup, creative, media, marketing, medical, or an explicit dress code (business casual, formal, etc.).",
+                "- If industry is missing, include it as part of your clarifying question even if other context is present.",
+              ]
+            : []),
+          "",
+          "CLARIFYING RESPONSE SHAPE:",
           `{
   "responseType": "clarifying",
-  "intent": "professional",
-  "title": "Let's Get to Work",
+  "intent": "${intent}",
+  "title": "Quick question",
   "sections": [
-    { "key": "intro", "content": ["Let's build your work wardrobe — just a quick question first."] },
-    { "key": "next_questions", "content": ["What industry do you work in, and is there a dress code — corporate, business casual, tech, or creative?"] }
+    { "key": "intro", "content": ["[One warm, short sentence to set up the question.]"] },
+    { "key": "next_questions", "content": ["[Your 1-2 questions combined into one natural sentence.]"] }
+  ]
+}`,
+          "",
+        ].join("\n")
+      : "",
+    responseType === "wardrobe_gap"
+      ? [
+          "WARDROBE GAP RESPONSE RULES:",
+          isWardrobeGapFollowup
+            ? "- The user is asking for more options. Recommend exactly 2 NEW pieces not already suggested in the conversation."
+            : "- The user has told you which area of their wardrobe is lacking. Recommend 3-4 specific pieces they should add.",
+          "- Each item should be a standalone piece, not a full outfit.",
+          "- Focus on versatile, high-impact additions that fill real gaps.",
+          "- Write each description in 1-2 sentences: what the piece is and why it earns its place in their wardrobe.",
+          "- Sound like a stylist friend giving honest, direct advice.",
+          isWardrobeGapFollowup && wardrobeGapShownItems.length > 0
+            ? `- CRITICAL: You already recommended these items: ${wardrobeGapShownItems.join(", ")}. Do NOT suggest any of these again. Every item must be completely new.`
+            : isWardrobeGapFollowup
+            ? "- CRITICAL: Check the conversation history and do NOT recommend any item already mentioned. Every item must be fresh and different."
+            : "- The baselines below are inspiration and directional guidance only — not a script. Use them as a starting point but vary the specific items, descriptions, and angles each time.",
+          "",
+          "DATE NIGHT DIRECTION (black/white palette, elevated and intentional):",
+          "- Anchored in tops that feel special: lace, sheer, off-shoulder, asymmetric, structured",
+          "- Think: something you'd specifically buy for a date, not just reach for",
+          "",
+          "GOING OUT DIRECTION (bold, night-out energy, leather and statement pieces):",
+          "- Anchored in pieces with attitude: leather jacket, leather pants, mini skirt, knee-high boots",
+          "- Think: looks that feel confident and cool in a group setting",
+          "",
+          "WORK DIRECTION (smart-casual, elevated basics):",
+          "- Anchored in versatile workhorses: blazer, polo, knit dress, tailored trouser",
+          "- Think: pieces that look intentional on a Zoom call and in a meeting room",
+          "",
+          "WARDROBE GAP RESPONSE SHAPE:",
+          `{
+  "responseType": "wardrobe_gap",
+  "intent": "${intent}",
+  "title": "What Your Wardrobe Is Missing",
+  "sections": [
+    { "key": "intro", "content": ["[One sentence framing the category they need help with.]"] },
+    {
+      "key": "wardrobe_items",
+      "items": [
+        { "slot": 1, "name": "[piece name]", "description": "[1-2 sentences on what it is and why it matters]", "category": "[tops|bottoms|dresses|outerwear|shoes|accessories]" },
+        { "slot": 2, "name": "[piece name]", "description": "[1-2 sentences]", "category": "[category]" },
+        { "slot": 3, "name": "[piece name]", "description": "[1-2 sentences]", "category": "[category]" },
+        { "slot": 4, "name": "[piece name]", "description": "[1-2 sentences]", "category": "[category]" }
+      ]
+    }
   ]
 }`,
           "",
@@ -369,6 +442,12 @@ export function buildIntentPromptPack(args: {
           "  - suit: tailored blazer + matching trouser (same fabric)",
           "  - jumpsuit: one-piece jumpsuit or romper",
           "- imageHint.aesthetic: one of minimal | classic | edgy | romantic | maximalist | bohemian",
+          "  - minimal: clean basics, jeans + tee/button-down/sweater, simple silhouettes, unfussy — use for tech/casual work and everyday looks",
+          "  - classic: tailored, structured, pinstripes, blazer + dress trousers, polished — use for corporate/finance/law environments only",
+          "  - edgy: unconventional, leather, bold textures, statement cuts",
+          "  - romantic: soft, feminine, floral, draped",
+          "  - maximalist: bold print, layered, high-impact",
+          "  - bohemian: flowy, earthy, textured, relaxed",
           "- imageHint.colorStory: one of monochromatic | neutral-tones | bold-color | mixed",
           "  - monochromatic: head-to-toe one color (all-black, all-cream, all-camel)",
           "  - neutral-tones: mixed neutrals (chocolate + ivory, camel + beige, etc.)",
@@ -437,6 +516,7 @@ export function buildIntentPromptPack(args: {
   ]
 }`,
         ].join("\n")
+      : isWardrobeGap ? ""
       : followupFocusType === "refine_all"
         ? [
             "FOLLOWUP RESPONSE RULES (refine_all):",

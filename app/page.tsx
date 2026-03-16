@@ -5,7 +5,6 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar, PinnedChat, RecentChat } from "@/components/app-sidebar";
 import { ChatView } from "@/components/chat-view";
 import { Message } from "@/components/chat-message";
-import { PersonaId } from "@/components/persona-selector";
 import {
   getEffectiveLocation,
   detectHomeLocation,
@@ -20,6 +19,9 @@ import {
   hasCompletedOnboarding,
   getStyleProfile,
   formatStyleProfileForPrompt,
+  getSavedIndustry,
+  saveIndustry,
+  extractIndustryFromMessage,
   StyleProfile,
 } from "@/lib/style-profile";
 
@@ -35,8 +37,6 @@ export default function Home() {
   const [pinnedChats, setPinnedChats] = React.useState<PinnedChat[]>([]);
   const [recentChats, setRecentChats] = React.useState<RecentChat[]>([]);
 
-  // Persona state
-  const [selectedPersona, setSelectedPersona] = React.useState<PersonaId>("brutal-editor");
 
   // Onboarding — shown on first visit, hidden once complete or skipped
   const [showOnboarding, setShowOnboarding] = React.useState(false);
@@ -59,8 +59,11 @@ export default function Home() {
     setShowOnboarding(false);
   };
 
-  // Persistent user context — survives across turns so we don't re-ask things
-  const [userIndustry, setUserIndustry] = React.useState<string | undefined>(undefined);
+  // Persistent user context — survives across turns and sessions
+  const [userIndustry, setUserIndustry] = React.useState<string | undefined>(() => getSavedIndustry());
+
+  // Set to true when the LLM asks the wardrobe gap clarifying question — consumed on next send
+  const wardrobeGapPendingRef = React.useRef(false);
 
   // Weather — fetched once on load via browser geolocation, overridden by travel location
   const [weather, setWeather] = React.useState<string | undefined>(undefined);
@@ -131,13 +134,27 @@ export default function Home() {
       .find(m => m.role === "assistant" && m.structuredResponse?.intent)
       ?.structuredResponse?.intent;
 
-    // If the last assistant turn was a clarifying question, capture this reply as context
+    // Capture industry from any message (explicit answer or volunteered info)
     const lastAssistant = [...messages].reverse().find(m => m.role === "assistant");
+
+    // Consume the wardrobe gap pending flag set when the LLM asked the wardrobe clarifying question
+    const wasAskingWardrobeGap = wardrobeGapPendingRef.current;
+    wardrobeGapPendingRef.current = false;
+
+    // Detect if we're following up on a wardrobe gap response
+    const lastWasWardrobeGap = lastAssistant?.structuredResponse?.responseType === "wardrobe_gap";
+
     const wasAskingForIndustry =
       lastAssistant?.structuredResponse?.responseType === "clarifying" &&
       lastAssistant?.structuredResponse?.intent === "professional";
-    if (wasAskingForIndustry && !userIndustry) {
-      setUserIndustry(content);
+    if (!userIndustry) {
+      const industryFromMessage = wasAskingForIndustry
+        ? content
+        : extractIndustryFromMessage(content);
+      if (industryFromMessage) {
+        setUserIndustry(industryFromMessage);
+        saveIndustry(industryFromMessage);
+      }
     }
 
     // --- LOCATION DETECTION & STORAGE ---
@@ -183,11 +200,18 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userQuery: content,
-          personaId: selectedPersona,
+          personaId: "brutal-editor",
           mode: isFollowup ? "refine" : "initial",
           intent: lastKnownIntent,
           focusSlot: focusSlot || undefined,
           refineScope: modifyingAll ? "all" : "one",
+          isWardrobeGap: wasAskingWardrobeGap || lastWasWardrobeGap,
+          isWardrobeGapFollowup: lastWasWardrobeGap,
+          wardrobeGapShownItems: lastWasWardrobeGap
+            ? (lastAssistant?.structuredResponse as any)?.sections
+                ?.find((s: any) => s.key === "wardrobe_items")
+                ?.items?.map((i: any) => i.name) ?? []
+            : [],
           conversationHistory: messages.map(m => ({
             role: m.role,
             content: m.content || "",
@@ -211,20 +235,59 @@ export default function Home() {
 
       if (!response.ok) throw new Error("API Route failed");
 
-      const aiData = await response.json();
+      const streamingId = (Date.now() + 1).toString();
 
-      // Check if response has structured data (intent AND sections means it's a valid styling response)
-      const isStructuredResponse = aiData.intent && Array.isArray(aiData.sections);
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        structuredResponse: isStructuredResponse ? aiData : undefined,
-        content: !isStructuredResponse ? (aiData.message || JSON.stringify(aiData, null, 2)) : undefined,
-        inspirationImages: aiData.inspirationImages ?? undefined,
-        timestamp: new Date(),
-      };
+      const reader = response.body!.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          let event: any;
+          try { event = JSON.parse(line.slice(6)); } catch { continue; }
+
+          if (event.type === "done") {
+            const aiData = event.data;
+            const isStructuredResponse = aiData.intent && Array.isArray(aiData.sections);
+            const assistantMessage: Message = {
+              id: streamingId,
+              role: "assistant",
+              structuredResponse: isStructuredResponse ? aiData : undefined,
+              content: !isStructuredResponse ? (aiData.message || "") : undefined,
+              inspirationImages: aiData.inspirationImages ?? undefined,
+              timestamp: new Date(),
+            };
+
+            if (
+              isStructuredResponse &&
+              aiData.responseType === "clarifying" &&
+              aiData.sections?.some((s: any) =>
+                s.key === "next_questions" &&
+                s.content?.[0]?.toLowerCase().includes("wardrobe")
+              )
+            ) {
+              wardrobeGapPendingRef.current = true;
+            }
+
+            setMessages((prev) => [...prev, assistantMessage]);
+          } else if (event.type === "error") {
+            setMessages((prev) => [...prev, {
+              id: streamingId,
+              role: "assistant" as const,
+              content: "Oops, something went wrong on my end — please try again!",
+              timestamp: new Date(),
+            }]);
+          }
+        }
+      }
     } catch (error) {
       console.error("Chat Error:", error);
       setMessages((prev) => [...prev, {
@@ -238,7 +301,32 @@ export default function Home() {
     }
   };
 
+  const WARDROBE_GAP_PROMPT = "Help me figure out what's missing from my wardrobe";
+  const WARDROBE_GAP_QUESTION = "What area of your wardrobe feels most lacking — going out, date night, or work?";
+
   const handleStarterSelect = (prompt: string) => {
+    if (prompt === WARDROBE_GAP_PROMPT) {
+      // Show clarifying question immediately without an API call
+      setMessages([
+        { id: Date.now().toString(), role: "user", content: prompt, timestamp: new Date() },
+        {
+          id: (Date.now() + 1).toString(),
+          role: "assistant",
+          structuredResponse: {
+            responseType: "clarifying",
+            intent: "social",
+            title: "Quick question",
+            sections: [
+              { key: "intro", content: ["Let's pinpoint what your wardrobe truly needs."] },
+              { key: "next_questions", content: [WARDROBE_GAP_QUESTION] },
+            ],
+          } as any,
+          timestamp: new Date(),
+        },
+      ]);
+      wardrobeGapPendingRef.current = true;
+      return;
+    }
     handleSendMessage(prompt);
   };
 
@@ -300,8 +388,6 @@ export default function Home() {
             onTogglePin={handleTogglePin}
             chatTitle={chatTitle}
             isLoading={isLoading}
-            selectedPersona={selectedPersona}
-            onSelectPersona={setSelectedPersona}
           />
       </SidebarInset>
     </SidebarProvider>

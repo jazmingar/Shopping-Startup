@@ -12,11 +12,11 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 // IMPORTANT: Make persona instructions JSON-safe (no "always use bullets" rules).
 const personaInstructions: Record<string, string> = {
   "brutal-editor": `
-You are "The Executive Editor"—a Vogue editor with 25 years of experience.
-TONE: Sophisticated, authoritative, and direct. No fluff, just expert guidance.
-AESTHETIC: Quiet Luxury, minimalist, architectural. Think Khaite, Bottega Veneta, The Row, Frankie Shop, Victoria Beckham vibes (but never mention brand names).
-BEHAVIOR: Always look for opportunities to elevate the look. Stay current on 2026 trends.
-VOICE: Confident, decisive, refined. "This is the only option." "Elevate this with..." "The proportions here are key."
+You are a personal stylist with 25+ years of experience dressing real women for real life.
+TONE: Warm but direct. Opinionated without being harsh. You have a point of view and you share it — but always in service of making the user feel great, not showing off your taste.
+AESTHETIC: Modern, elevated, wearable. You know what's trending but you prioritize what actually works. Clean silhouettes, intentional styling, pieces that last more than one season.
+BEHAVIOR: Give a clear recommendation. Don't hedge. If something is a strong choice, say so. If there's one look that's clearly the best, lead with it. Think like a stylist who has seen it all and knows exactly what works.
+VOICE: Conversational and confident. Speak like a trusted expert giving advice to a friend — never clinical, never generic. "This is the move." "Trust the proportion here." "One swap makes this outfit."
 RULES:
 - Never mention specific brand names.
 - Never mention budget.
@@ -211,7 +211,8 @@ function assertValidLlmResponse(
   // "clarifying" is a valid alternative when "initial" was expected —
   // the LLM decided it needs one more signal before showing looks.
   const isClarifying = data.responseType === "clarifying";
-  if (data.responseType !== expected.responseType && !isClarifying) {
+  const isWardrobeGap = data.responseType === "wardrobe_gap";
+  if (data.responseType !== expected.responseType && !isClarifying && !isWardrobeGap) {
     throw new Error(`Wrong responseType. Expected ${expected.responseType}`);
   }
 
@@ -225,8 +226,8 @@ function assertValidLlmResponse(
 
   const curated = data.sections.find((s: any) => s?.key === "curated_looks");
 
-  // Skip curated_looks validation for clarifying responses (they intentionally have none)
-  if (expected.responseType === "initial" && !isClarifying) {
+  // Skip curated_looks validation for clarifying and wardrobe_gap responses
+  if (expected.responseType === "initial" && !isClarifying && !isWardrobeGap) {
     if (!curated || !Array.isArray(curated.options)) {
       throw new Error("initial must include curated_looks.options");
     }
@@ -277,8 +278,12 @@ export async function POST(req: Request) {
    const effectiveMode: "initial" | "refine" = mode;
 
 
+    const isWardrobeGap = payload?.isWardrobeGap === true;
+    const isWardrobeGapFollowup = payload?.isWardrobeGapFollowup === true;
+    const wardrobeGapShownItems: string[] = Array.isArray(payload?.wardrobeGapShownItems) ? payload.wardrobeGapShownItems : [];
+
     const responseType: ResponseType =
-      effectiveMode === "refine" ? "followup" : "initial";
+      isWardrobeGap ? "wardrobe_gap" : effectiveMode === "refine" ? "followup" : "initial";
 
     // Optional userContext (keep small to control tokens)
     const userContext = payload?.userContext as
@@ -307,7 +312,8 @@ export async function POST(req: Request) {
 if (
   effectiveMode === "refine" &&
   !payload?.refineScope &&
-  !payload?.focusSlot
+  !payload?.focusSlot &&
+  !payload?.isWardrobeGap
 ) {
   return NextResponse.json({
     responseType: "followup",
@@ -361,13 +367,15 @@ if (!resolvedIntent) {
 }
 
 
-    // Build intent pack (now includes mode + focusSlot)
     const { system: intentSystem, user: intentUser } = buildIntentPromptPack({
       intent: resolvedIntent,
       userQuery,
       mode: effectiveMode,
       focusSlot,
       userContext,
+      isWardrobeGap,
+      isWardrobeGapFollowup,
+      wardrobeGapShownItems,
     });
 
     // Add a small hard reminder at the system-level too (belt + suspenders)
@@ -403,70 +411,74 @@ HARD REMINDER:
     // Add current user message
     messages.push({ role: "user", content: intentUser });
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
-      response_format: { type: "json_object" },
-      messages,
-      temperature: 0.7,
+    const encoder = new TextEncoder();
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        const send = (event: object) =>
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
+
+        try {
+          const completion = await openai.chat.completions.create({
+            model: "gpt-4o",
+            response_format: { type: "json_object" },
+            messages,
+            temperature: 0.7,
+            stream: true,
+          });
+
+          let raw = "";
+
+          for await (const chunk of completion) {
+            raw += chunk.choices[0]?.delta?.content ?? "";
+          }
+
+          const parsed = safeParseJson(raw);
+          if (!parsed.ok) {
+            send({ type: "error", detail: parsed.error });
+            controller.close();
+            return;
+          }
+
+          try {
+            assertValidLlmResponse(parsed.value, { responseType, intent: resolvedIntent, focusSlot });
+          } catch (e: any) {
+            send({ type: "error", detail: e?.message });
+            controller.close();
+            return;
+          }
+
+          let inspirationImages: string[] | undefined;
+          if (responseType === "initial") {
+            const curatedSection = parsed.value.sections.find((s: any) => s.key === "curated_looks");
+            if (curatedSection && "options" in curatedSection) {
+              const usedUrls: string[] = [];
+              const images = (curatedSection.options as any[]).map((option) => {
+                const url = getImageForSlot(resolvedIntent, userContext?.location, option.slot as 1 | 2 | 3, option.imageHint, usedUrls);
+                if (url) usedUrls.push(url);
+                return url;
+              });
+              if (images.some((url: string) => url)) inspirationImages = images;
+            }
+          }
+
+          send({ type: "done", data: { ...parsed.value, ...(inspirationImages && { inspirationImages }) } });
+        } catch (err: any) {
+          send({ type: "error", detail: err?.message });
+        }
+
+        controller.close();
+      },
     });
 
-    const raw = completion.choices?.[0]?.message?.content ?? "";
-    const parsed = safeParseJson(raw);
-
-    if (!parsed.ok) {
-      console.error("[json-parse-failed]", { error: parsed.error, raw });
-      return NextResponse.json(
-        { error: "Model returned invalid JSON", detail: parsed.error, raw },
-        { status: 500 }
-      );
-    }
-
-    try {
-      assertValidLlmResponse(parsed.value, {
-        responseType,
-        intent: resolvedIntent,
-        focusSlot,
-      });
-    } catch (e: any) {
-      console.error("[schema-invalid]", { error: e?.message, raw, parsed: parsed.value });
-      return NextResponse.json(
-        { error: "Model returned JSON that does not match schema", detail: e?.message, raw },
-        { status: 500 }
-      );
-    }
-
-    // For initial responses only, look up one image per slot using the LLM's imageHint.
-    // If no hint or no match, that slot gets an empty string (no image shown).
-    let inspirationImages: string[] | undefined;
-    if (responseType === "initial") {
-      const curatedSection = parsed.value.sections.find(
-        (s: any) => s.key === "curated_looks"
-      );
-      if (curatedSection && "options" in curatedSection) {
-        const usedUrls: string[] = [];
-        const images = (curatedSection.options as any[]).map((option) => {
-          const url = getImageForSlot(
-            resolvedIntent,
-            userContext?.location,
-            option.slot as 1 | 2 | 3,
-            option.imageHint,
-            usedUrls
-          );
-          if (url) usedUrls.push(url);
-          return url;
-        });
-        // Only attach if at least one slot has an image
-        if (images.some((url: string) => url)) {
-          inspirationImages = images;
-        }
-      }
-    }
-
-    return NextResponse.json({ ...parsed.value, ...(inspirationImages && { inspirationImages }) });
+    return new Response(stream, {
+      headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache" },
+    });
   } catch (error: any) {
-    console.error("OpenAI Error:", error);
+    console.error("OpenAI Error:", error?.message ?? error);
+    console.error("Stack:", error?.stack);
     return NextResponse.json(
-      { error: "Server error while generating outfit response." },
+      { error: "Server error while generating outfit response.", detail: error?.message },
       { status: 500 }
     );
   }
