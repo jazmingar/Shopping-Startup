@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { saveStyleProfile } from "@/lib/style-profile";
 
@@ -16,7 +16,7 @@ const STYLE_OPTIONS = [
 const LIFESTYLE_OPTIONS = [
   "Mostly remote",
   "In-office / professional setting",
-  "Lots of social events",
+  "Social events",
   "Active / outdoors",
   "Mix of everything",
 ];
@@ -71,8 +71,20 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
         {/* Top bar */}
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Sparkles className="h-4 w-4" />
-            <span>Step {step} of 3</span>
+            {step > 1 ? (
+              <button
+                onClick={() => setStep((s) => s - 1)}
+                className="flex items-center gap-1 hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Back
+              </button>
+            ) : (
+              <>
+                <Sparkles className="h-4 w-4" />
+                <span>Step {step} of 3</span>
+              </>
+            )}
           </div>
           <button
             onClick={onSkip}
