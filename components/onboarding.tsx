@@ -159,12 +159,11 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
             <h2 className="mb-1 text-2xl font-medium">
               What&apos;s one thing you feel like your wardrobe is missing?
             </h2>
-            <p className="mb-6 text-sm text-muted-foreground">One line is enough.</p>
             <textarea
               value={wardrobeGap}
               onChange={(e) => setWardrobeGap(e.target.value)}
               placeholder="e.g. going-out looks, better workwear, more basics..."
-              className="w-full resize-none rounded-xl border border-border bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-muted-foreground focus:border-foreground transition-colors"
+              className="mt-6 w-full resize-none rounded-xl border border-border bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-muted-foreground focus:border-foreground transition-colors"
               rows={3}
               autoFocus
             />
@@ -173,7 +172,7 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
 
         {/* Continue / Get started */}
         <div className="mt-8">
-          <Button onClick={handleNext} disabled={!canProceed()} className="w-full">
+          <Button onClick={handleNext} disabled={!canProceed()} className="w-full bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90">
             {step === 3 ? "Get started" : "Continue"}
           </Button>
         </div>
