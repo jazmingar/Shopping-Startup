@@ -71,7 +71,7 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
         {/* Top bar */}
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            {step > 1 ? (
+            {step > 1 && (
               <button
                 onClick={() => setStep((s) => s - 1)}
                 className="flex items-center gap-1 hover:text-foreground transition-colors"
@@ -79,12 +79,9 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
                 <ArrowLeft className="h-4 w-4" />
                 Back
               </button>
-            ) : (
-              <>
-                <Sparkles className="h-4 w-4" />
-                <span>Step {step} of 3</span>
-              </>
             )}
+            {step === 1 && <Sparkles className="h-4 w-4" />}
+            <span>Step {step} of 3</span>
           </div>
           <button
             onClick={onSkip}
@@ -169,12 +166,12 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
         {step === 3 && (
           <div>
             <h2 className="mb-1 text-2xl font-medium">
-              What&apos;s one thing you feel like your wardrobe is missing?
+              What would you like to focus on with your style right now?
             </h2>
             <textarea
               value={wardrobeGap}
               onChange={(e) => setWardrobeGap(e.target.value)}
-              placeholder="e.g. going-out looks, better workwear, more basics..."
+              placeholder="e.g. more date nights, building a spring wardrobe, starting fresh, going out looks..."
               className="mt-6 w-full resize-none rounded-xl border border-border bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-muted-foreground focus:border-foreground transition-colors"
               rows={3}
               autoFocus
