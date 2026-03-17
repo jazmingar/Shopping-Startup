@@ -66,8 +66,8 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
-      <div className="w-full max-w-md px-6">
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background px-4 py-8 sm:items-center sm:px-6">
+      <div className="w-full max-w-md">
         {/* Top bar */}
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">

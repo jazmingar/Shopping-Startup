@@ -84,12 +84,12 @@ function StructuredResponse({
                 </div>
                 {/* Images as a horizontal row after all text */}
                 {hasImages && (
-                  <div className="grid grid-cols-3 gap-3 pt-2">
+                  <div className="flex gap-3 overflow-x-auto pt-2 pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
                     {section.options.map((option, optIdx) => {
                       const url = slotImages?.[option.slot - 1] ?? "";
                       if (!url) return null;
                       return (
-                        <div key={optIdx}>
+                        <div key={optIdx} className="w-44 shrink-0 sm:w-auto">
                           <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                             Look {String(option.slot).padStart(2, "0")}
                           </p>
@@ -247,7 +247,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
             <img
               src={message.image || "/placeholder.svg"}
               alt="Uploaded outfit"
-              className="h-48 w-auto object-cover"
+              className="h-48 w-auto max-w-full object-cover"
             />
           </div>
         )}

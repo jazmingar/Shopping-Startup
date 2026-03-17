@@ -39,7 +39,7 @@ const chips: StarterChip[] = [
 
 export function StarterChips({ onSelect }: StarterChipsProps) {
   return (
-    <div className="flex flex-nowrap justify-center gap-3">
+    <div className="flex flex-wrap justify-center gap-2">
       {chips.map((chip) => (
         <button
           key={chip.id}
