@@ -50,7 +50,7 @@ function StructuredResponse({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 space-y-6 wrap-break-word">
       {/* Response Title */}
       {response.title && (
         <h2 className="text-2xl font-bold text-foreground">{response.title}</h2>
@@ -84,16 +84,16 @@ function StructuredResponse({
                 </div>
                 {/* Images as a horizontal row after all text */}
                 {hasImages && (
-                  <div className="flex gap-3 overflow-x-auto pt-2 pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
+                  <div className="grid grid-cols-2 gap-2 pt-2 sm:grid-cols-3 sm:gap-3">
                     {section.options.map((option, optIdx) => {
                       const url = slotImages?.[option.slot - 1] ?? "";
                       if (!url) return null;
                       return (
-                        <div key={optIdx} className="w-44 shrink-0 sm:w-auto">
+                        <div key={optIdx}>
                           <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                             Look {String(option.slot).padStart(2, "0")}
                           </p>
-                          <div className="aspect-3/4 overflow-hidden rounded-xl bg-secondary">
+                          <div className="aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
                             <img
                               src={url}
                               alt={`Look ${option.slot}: ${option.title}`}
@@ -237,7 +237,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
     >
       <div
         className={cn(
-          "space-y-3",
+          "min-w-0 space-y-3",
           isUser ? "max-w-[85%] flex flex-col items-end" : "w-full"
         )}
       >

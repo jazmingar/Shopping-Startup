@@ -50,8 +50,13 @@ export function AppSidebar({
   onNewChat,
   onSelectChat,
 }: AppSidebarProps) {
-  const { toggleSidebar, state } = useSidebar();
+  const { toggleSidebar, state, isMobile, setOpenMobile } = useSidebar();
   const isCollapsed = state === "collapsed";
+
+  const handleNewChat = () => {
+    onNewChat();
+    if (isMobile) setOpenMobile(false);
+  };
 
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border">
@@ -71,7 +76,7 @@ export function AppSidebar({
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton
-                onClick={onNewChat}
+                onClick={handleNewChat}
                 className="justify-start gap-3 rounded-lg border border-dashed border-sidebar-border bg-transparent hover:border-sidebar-foreground/30"
               >
                 <Plus className="h-4 w-4" />
