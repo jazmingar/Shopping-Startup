@@ -124,7 +124,17 @@ function resolveIntentFromText(userText: string): Intent | null {
     t.includes("presentation") ||
     t.includes("conference") ||
     t.includes("interview") ||
-    t.includes("professional")
+    t.includes("professional") ||
+    t.includes("job") ||
+    t.includes("startup") ||
+    t.includes("salary") ||
+    t.includes("networking") ||
+    t.includes("business casual") ||
+    t.includes("smart casual") ||
+    t.includes("dress code") ||
+    t.includes("panel") ||
+    t.includes("promoted") ||
+    t.includes("promotion")
   )
     return "professional";
 
@@ -161,7 +171,15 @@ function resolveIntentFromText(userText: string): Intent | null {
     t.includes("concert") ||
     t.includes("party") ||
     t.includes("girls night") ||
-    (t.includes("dinner") && t.includes("friends"))
+    t.includes("brunch") ||
+    t.includes("rooftop") ||
+    t.includes("birthday") ||
+    t.includes("bbq") ||
+    t.includes("cookout") ||
+    t.includes("gala") ||
+    t.includes("invited") ||
+    (t.includes("dinner") && (t.includes("friend") || t.includes("girls"))) ||
+    (t.includes("girls") && (t.includes("night") || t.includes("out") || t.includes("dinner") || t.includes("brunch")))
   )
     return "social";
 
