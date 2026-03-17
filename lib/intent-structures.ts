@@ -46,7 +46,7 @@ export type IntentStructure = {
    NEW: LLM OUTPUT CONTRACT (what the model must return)
    ========================================================= */
 
-export type ResponseType = "initial" | "followup" | "clarifying" | "wardrobe_gap";
+export type ResponseType = "initial" | "followup" | "clarifying" | "wardrobe_gap" | "outfit_feedback";
 
 /**
  * Structured hint the LLM outputs per slot so the backend can look up
@@ -159,7 +159,14 @@ export type WardrobeGapResponse = {
   sections: (TextSection | WardrobeItemsSection)[];
 };
 
-export type LlmResponse = InitialResponse | FollowupResponse | ClarifyingResponse | WardrobeGapResponse;
+export type OutfitFeedbackResponse = {
+  responseType: "outfit_feedback";
+  intent: Intent;
+  title: string;
+  sections: TextSection[];
+};
+
+export type LlmResponse = InitialResponse | FollowupResponse | ClarifyingResponse | WardrobeGapResponse | OutfitFeedbackResponse;
 
 /* =========================================================
    EXISTING: Intent definitions

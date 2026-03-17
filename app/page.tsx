@@ -65,6 +65,9 @@ export default function Home() {
   // Set to true when the LLM asks the wardrobe gap clarifying question — consumed on next send
   const wardrobeGapPendingRef = React.useRef(false);
 
+  // Stores an uploaded image when the LLM asks a clarifying question — re-sent on next turn
+  const pendingImageRef = React.useRef<File | null>(null);
+
   // Weather — fetched once on load via browser geolocation, overridden by travel location
   const [weather, setWeather] = React.useState<string | undefined>(undefined);
   const weatherLocationRef = React.useRef<string | null>(null);
@@ -103,6 +106,10 @@ export default function Home() {
 
   // THE UPDATED BRAIN LOGIC
   const handleSendMessage = async (content: string, image?: File) => {
+    // Use pending image (from a prior clarifying turn) if no new image was attached
+    const imageToSend = image ?? pendingImageRef.current ?? undefined;
+    pendingImageRef.current = null;
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
@@ -194,6 +201,17 @@ export default function Home() {
       ? getCityAesthetic(locationContext.location)
       : null;
 
+    // Convert image to base64 for vision API
+    let imageBase64: string | undefined;
+    if (imageToSend) {
+      imageBase64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve((reader.result as string).split(",")[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(imageToSend);
+      });
+    }
+
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -212,6 +230,7 @@ export default function Home() {
                 ?.find((s: any) => s.key === "wardrobe_items")
                 ?.items?.map((i: any) => i.name) ?? []
             : [],
+          imageBase64: imageBase64 || undefined,
           conversationHistory: messages.map(m => ({
             role: m.role,
             content: m.content || "",
@@ -275,6 +294,11 @@ export default function Home() {
               )
             ) {
               wardrobeGapPendingRef.current = true;
+            }
+
+            // If image was uploaded and LLM asked a clarifying question, hold the image for the next turn
+            if (isStructuredResponse && aiData.responseType === "clarifying" && imageToSend) {
+              pendingImageRef.current = imageToSend;
             }
 
             setMessages((prev) => [...prev, assistantMessage]);

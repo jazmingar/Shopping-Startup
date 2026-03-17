@@ -68,7 +68,7 @@ export function formatStyleProfileForPrompt(profile: StyleProfile): string {
     parts.push(`Lifestyle: ${profile.weeklyLifestyle.join(", ")}`);
   }
   if (profile.wardrobeGap) {
-    parts.push(`Wardrobe gap: ${profile.wardrobeGap}`);
+    parts.push(`Style focus: ${profile.wardrobeGap}`);
   }
   return parts.join(" | ");
 }

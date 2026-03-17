@@ -54,6 +54,23 @@ function normalize(text: string) {
   return text.toLowerCase().replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
 }
 
+/**
+ * Strict occasion resolver used for image uploads only.
+ * No generic catchall — returns null if no clear occasion is stated.
+ * This ensures vague prompts like "What do you think?" ask for context first.
+ */
+function resolveOccasionFromImage(userText: string): Intent | null {
+  const t = normalize(userText);
+  if (t.includes("wedding") || t.includes("bridal") || t.includes("bachelorette") || t.includes("rehearsal") || t.includes("engagement")) return "wedding_event";
+  if (t.includes("travel") || t.includes("trip") || t.includes("vacation") || t.includes("packing for") || t.includes("flying to")) return "travel";
+  if (t.includes("pregnant") || t.includes("pregnancy") || t.includes("maternity") || t.includes("expecting") || t.includes("trimester")) return "pregnancy";
+  if (t.includes("work") || t.includes("office") || t.includes("meeting") || t.includes("interview") || t.includes("professional")) return "professional";
+  if (t.includes("date") || t.includes("date night") || t.includes("hinge") || t.includes("bumble")) return "date";
+  if (t.includes("fall") || t.includes("winter") || t.includes("spring") || t.includes("summer") || t.includes("season")) return "seasonality";
+  if (t.includes("night out") || t.includes("going out") || t.includes("club") || t.includes("concert") || t.includes("party") || t.includes("dinner") || t.includes("brunch") || t.includes("event")) return "social";
+  return null;
+}
+
 function resolveIntentFromText(userText: string): Intent | null {
   const t = normalize(userText);
 
@@ -208,15 +225,14 @@ function assertValidLlmResponse(
 ): asserts data is LlmResponse {
   if (!data || typeof data !== "object") throw new Error("LLM output is not an object");
 
-  // "clarifying" is a valid alternative when "initial" was expected —
-  // the LLM decided it needs one more signal before showing looks.
   const isClarifying = data.responseType === "clarifying";
   const isWardrobeGap = data.responseType === "wardrobe_gap";
-  if (data.responseType !== expected.responseType && !isClarifying && !isWardrobeGap) {
+  const isOutfitFeedback = data.responseType === "outfit_feedback";
+  if (data.responseType !== expected.responseType && !isClarifying && !isWardrobeGap && !isOutfitFeedback) {
     throw new Error(`Wrong responseType. Expected ${expected.responseType}`);
   }
 
-  if (data.intent !== expected.intent) {
+  if (!isOutfitFeedback && data.intent !== expected.intent) {
     throw new Error(`Wrong intent. Expected ${expected.intent}`);
   }
 
@@ -226,8 +242,7 @@ function assertValidLlmResponse(
 
   const curated = data.sections.find((s: any) => s?.key === "curated_looks");
 
-  // Skip curated_looks validation for clarifying and wardrobe_gap responses
-  if (expected.responseType === "initial" && !isClarifying && !isWardrobeGap) {
+  if (expected.responseType === "initial" && !isClarifying && !isWardrobeGap && !isOutfitFeedback) {
     if (!curated || !Array.isArray(curated.options)) {
       throw new Error("initial must include curated_looks.options");
     }
@@ -242,7 +257,6 @@ function assertValidLlmResponse(
   }
 
   if (expected.responseType === "followup") {
-    // followups MUST NOT include options arrays anywhere
     const hasOptionsAnywhere = JSON.stringify(data).includes('"options":');
     if (hasOptionsAnywhere) {
       throw new Error('followup must not include any "options" arrays');
@@ -277,6 +291,9 @@ export async function POST(req: Request) {
 
    const effectiveMode: "initial" | "refine" = mode;
 
+
+    const imageBase64 = typeof payload?.imageBase64 === "string" ? payload.imageBase64 : null;
+    const isImageUpload = Boolean(imageBase64);
 
     const isWardrobeGap = payload?.isWardrobeGap === true;
     const isWardrobeGapFollowup = payload?.isWardrobeGapFollowup === true;
@@ -346,23 +363,123 @@ if (
 
 
 
+// For image uploads, use strict occasion resolver (no generic social fallback)
+const imageOccasion = isImageUpload ? (resolveOccasionFromImage(userQuery) || priorIntent || null) : null;
+
+// IMAGE UPLOAD: no clear occasion → ask clarifying question before calling OpenAI
+if (isImageUpload && !imageOccasion) {
+  const clarifyingData = {
+    responseType: "clarifying",
+    intent: "social",
+    title: "Quick question",
+    sections: [
+      { key: "intro", content: ["Love the look — just need one more detail."] },
+      { key: "next_questions", content: ["What are you wearing this for?"] },
+    ],
+  };
+  const enc = new TextEncoder();
+  const clarifyStream = new ReadableStream({
+    start(controller) {
+      controller.enqueue(enc.encode(`data: ${JSON.stringify({ type: "done", data: clarifyingData })}\n\n`));
+      controller.close();
+    },
+  });
+  return new Response(clarifyStream, {
+    headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache" },
+  });
+}
+
+// IMAGE UPLOAD: occasion known → outfit feedback via vision
+if (isImageUpload && imageOccasion) {
+  const outfitFeedbackSystem = [
+    personaSystem.trim(),
+    "",
+    "IMAGE ANALYSIS MODE:",
+    "The user has shared a photo of an outfit. Your job is to analyze it and give direct, editorial feedback.",
+    "- Look at the silhouette, color palette, fit, and styling choices.",
+    "- Tell them what's working and what one or two things would elevate it.",
+    "- Be specific — reference actual elements from the image.",
+    "- Warm, confident, opinionated. Like a trusted stylist friend who has seen it all.",
+    "Return VALID JSON only. No markdown. No extra commentary.",
+    "",
+    `OUTPUT CONTRACT:
+{
+  "responseType": "outfit_feedback",
+  "intent": "${imageOccasion}",
+  "title": "Outfit Read",
+  "sections": [
+    { "key": "intro", "content": ["Your overall impression in 1-2 direct sentences."] },
+    { "key": "style_notes", "content": ["What's working.", "What to change or add.", "Optional third observation."] },
+    { "key": "next_questions", "content": ["One follow-up styling question or suggestion."] }
+  ]
+}`,
+    "RULES: Never mention brands. Never mention budget. Keep style_notes to 2-3 items. Do not comment on nails.",
+  ].join("\n");
+
+  const convHistory = Array.isArray(payload?.conversationHistory) ? payload.conversationHistory : [];
+  const visionMessages: any[] = [
+    { role: "system", content: outfitFeedbackSystem },
+    ...convHistory
+      .filter((m: any) => m.role === "user" || m.role === "assistant")
+      .map((m: any) => ({ role: m.role, content: m.content || "" })),
+    {
+      role: "user",
+      content: [
+        { type: "text", text: userQuery || "What do you think of this outfit?" },
+        { type: "image_url", image_url: { url: `data:image/jpeg;base64,${imageBase64}`, detail: "low" } },
+      ],
+    },
+  ];
+
+  const encoder = new TextEncoder();
+  const visionStream = new ReadableStream({
+    async start(controller) {
+      const send = (event: object) =>
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-4o",
+          response_format: { type: "json_object" },
+          messages: visionMessages,
+          temperature: 0.7,
+          stream: true,
+        });
+        let raw = "";
+        for await (const chunk of completion) {
+          raw += chunk.choices[0]?.delta?.content ?? "";
+        }
+        const parsed = safeParseJson(raw);
+        if (!parsed.ok) { send({ type: "error", detail: parsed.error }); controller.close(); return; }
+        try {
+          assertValidLlmResponse(parsed.value, { responseType: "outfit_feedback", intent: imageOccasion! });
+        } catch (e: any) {
+          send({ type: "error", detail: e?.message }); controller.close(); return;
+        }
+        send({ type: "done", data: parsed.value });
+      } catch (err: any) {
+        send({ type: "error", detail: err?.message });
+      }
+      controller.close();
+    },
+  });
+  return new Response(visionStream, {
+    headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache" },
+  });
+}
+
 if (!resolvedIntent) {
   const hasAnchor = Boolean(priorIntent);
 
-  // Only reject if there's no conversation anchor AND it's obviously not fashion
   if (!hasAnchor && isObviouslyNonFashion(userQuery)) {
     return NextResponse.json({
       intent: "unsupported",
-      message:
-       "I focus on personal style and outfits. What are we styling today?",
+      message: "I focus on personal style and outfits. What are we styling today?",
     });
   }
 
-  // Otherwise: assume it's fashion but unclear
   return NextResponse.json({
     intent: "unknown",
-    message:
-      "What are we dressing for — work, a date, a wedding, or something social?",
+    message: "What are we dressing for — work, a date, a wedding, or something social?",
   });
 }
 

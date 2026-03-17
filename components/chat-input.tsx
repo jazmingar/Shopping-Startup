@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Plus, Send, Camera, X, ImageIcon } from "lucide-react";
+import { Send, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -112,18 +112,8 @@ export function ChatInput({
               className="h-9 w-9 shrink-0 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground"
               onClick={() => fileInputRef.current?.click()}
             >
-              <Plus className="h-5 w-5" />
-              <span className="sr-only">Add image</span>
-            </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="h-9 w-9 shrink-0 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground"
-              onClick={() => fileInputRef.current?.click()}
-            >
               <Camera className="h-5 w-5" />
-              <span className="sr-only">Take photo</span>
+              <span className="sr-only">Upload photo</span>
             </Button>
           </div>
 
