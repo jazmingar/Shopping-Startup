@@ -15,13 +15,6 @@ const STYLE_OPTIONS = [
   { id: "Polished / Professional", desc: "tailored, put-together" },
 ];
 
-const LIFESTYLE_OPTIONS = [
-  "Mostly remote",
-  "In-office / professional setting",
-  "Social events",
-  "Active / outdoors",
-  "Mix of everything",
-];
 
 interface OnboardingProps {
   onComplete: () => void;
@@ -33,7 +26,6 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
   const [name, setName] = React.useState("");
   const [ageRange, setAgeRange] = React.useState("");
   const [styleSelections, setStyleSelections] = React.useState<string[]>([]);
-  const [lifestyleSelections, setLifestyleSelections] = React.useState<string[]>([]);
   const [wardrobeGap, setWardrobeGap] = React.useState("");
 
   const toggleStyle = (id: string) => {
@@ -44,21 +36,15 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
     });
   };
 
-  const toggleLifestyle = (id: string) => {
-    setLifestyleSelections((prev) =>
-      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
-    );
-  };
-
   const handleNext = () => {
-    if (step < 4) {
+    if (step < 3) {
       setStep((s) => s + 1);
     } else {
       saveStyleProfile({
         name,
         ageRange,
         styleDescriptors: styleSelections,
-        weeklyLifestyle: lifestyleSelections,
+        weeklyLifestyle: [],
         wardrobeGap,
       });
       onComplete();
@@ -68,7 +54,6 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
   const canProceed = () => {
     if (step === 1) return name.trim().length > 0 && ageRange.length > 0;
     if (step === 2) return styleSelections.length > 0;
-    if (step === 3) return lifestyleSelections.length > 0;
     return true;
   };
 
@@ -88,7 +73,7 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
               </button>
             )}
             {step === 1 && <Sparkles className="h-4 w-4" />}
-            <span>Step {step} of 4</span>
+            <span>Step {step} of 3</span>
           </div>
           <button
             onClick={onSkip}
@@ -100,7 +85,7 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
 
         {/* Progress bar */}
         <div className="mb-8 flex gap-1.5">
-          {[1, 2, 3, 4].map((s) => (
+          {[1, 2, 3].map((s) => (
             <div
               key={s}
               className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
@@ -186,34 +171,8 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
           </div>
         )}
 
-        {/* Step 3 — Lifestyle */}
+        {/* Step 3 — Wardrobe focus */}
         {step === 3 && (
-          <div>
-            <h2 className="mb-1 text-2xl font-medium">What does your typical week look like?</h2>
-            <p className="mb-6 text-sm text-muted-foreground">Select all that apply.</p>
-            <div className="space-y-2.5">
-              {LIFESTYLE_OPTIONS.map((label) => {
-                const selected = lifestyleSelections.includes(label);
-                return (
-                  <button
-                    key={label}
-                    onClick={() => toggleLifestyle(label)}
-                    className={`w-full rounded-xl border px-4 py-3.5 text-left font-medium transition-colors ${
-                      selected
-                        ? "border-foreground bg-foreground text-background"
-                        : "border-border hover:border-foreground/50"
-                    }`}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Step 4 — Wardrobe focus */}
-        {step === 4 && (
           <div>
             <h2 className="mb-1 text-2xl font-medium">
               What would you like to focus on with your style right now?
@@ -236,7 +195,7 @@ export function Onboarding({ onComplete, onSkip }: OnboardingProps) {
             disabled={!canProceed()}
             className="w-full bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
           >
-            {step === 4 ? "Get started" : "Continue"}
+            {step === 3 ? "Get started" : "Continue"}
           </Button>
         </div>
       </div>
