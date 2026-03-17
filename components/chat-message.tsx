@@ -93,13 +93,11 @@ function StructuredResponse({
                           <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                             Look {String(option.slot).padStart(2, "0")}
                           </p>
-                          <div className="aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
-                            <img
-                              src={url}
-                              alt={`Look ${option.slot}: ${option.title}`}
-                              className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                            />
-                          </div>
+                          <img
+                            src={url}
+                            alt={`Look ${option.slot}: ${option.title}`}
+                            className="w-full rounded-xl"
+                          />
                         </div>
                       );
                     })}
