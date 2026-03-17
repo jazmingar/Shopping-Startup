@@ -435,6 +435,7 @@ export default function Home() {
             isPinned={isPinned}
             onTogglePin={handleTogglePin}
             isLoading={isLoading}
+            userName={styleProfile?.name}
           />
       </SidebarInset>
     </SidebarProvider>

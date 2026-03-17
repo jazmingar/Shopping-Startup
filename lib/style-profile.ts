@@ -1,4 +1,6 @@
 export interface StyleProfile {
+  name: string;
+  ageRange: string;
   styleDescriptors: string[];
   weeklyLifestyle: string[];
   wardrobeGap: string;
@@ -61,6 +63,12 @@ export function saveIndustry(industry: string): void {
 /** Format for injection into the LLM prompt */
 export function formatStyleProfileForPrompt(profile: StyleProfile): string {
   const parts: string[] = [];
+  if (profile.name) {
+    parts.push(`Name: ${profile.name}`);
+  }
+  if (profile.ageRange) {
+    parts.push(`Age range: ${profile.ageRange}`);
+  }
   if (profile.styleDescriptors.length > 0) {
     parts.push(`Style: ${profile.styleDescriptors.join(", ")}`);
   }

@@ -17,6 +17,7 @@ interface ChatViewProps {
   isPinned: boolean;
   onTogglePin: () => void;
   isLoading?: boolean;
+  userName?: string;
 }
 
 const THINKING_PHRASES = [
@@ -68,6 +69,7 @@ export function ChatView({
   isPinned,
   onTogglePin,
   isLoading = false,
+  userName,
 }: ChatViewProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const isEmpty = messages.length === 0;
@@ -125,7 +127,7 @@ export function ChatView({
             <div className="w-full max-w-2xl">
               <h1 className="mb-6 flex items-center justify-center gap-2 text-2xl font-medium text-foreground sm:text-3xl">
                 <Sparkles className="h-6 w-6 sm:h-7 sm:w-7" />
-                Welcome
+                {userName ? `Hi, ${userName}` : "Welcome"}
               </h1>
               <ChatInput
                 onSubmit={onSendMessage}
