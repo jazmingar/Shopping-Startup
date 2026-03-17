@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Send, Camera, X } from "lucide-react";
+import { Send, Camera, X, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -20,8 +20,10 @@ export function ChatInput({
   const [image, setImage] = React.useState<File | null>(null);
   const [imagePreview, setImagePreview] = React.useState<string | null>(null);
   const [isFocused, setIsFocused] = React.useState(false);
+  const [isListening, setIsListening] = React.useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = React.useRef<any>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -58,6 +60,42 @@ export function ChatInput({
       handleSubmit(e);
     }
   };
+
+  const toggleVoice = () => {
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    recognition.onresult = (e: any) => {
+      let transcript = "";
+      for (let i = 0; i < e.results.length; i++) {
+        transcript += e.results[i][0].transcript;
+      }
+      setMessage(transcript);
+    };
+
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = () => setIsListening(false);
+
+    recognitionRef.current = recognition;
+    recognition.start();
+    setIsListening(true);
+  };
+
+  const hasSpeechSupport =
+    typeof window !== "undefined" &&
+    ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
 
   // Auto-resize textarea
   React.useEffect(() => {
@@ -124,16 +162,35 @@ export function ChatInput({
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder={placeholder}
-            disabled={disabled}
+            placeholder={isListening ? "Listening..." : placeholder}
             rows={1}
-            className="flex-1 resize-none bg-transparent py-2 text-base sm:text-sm leading-relaxed text-foreground placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex-1 resize-none bg-transparent py-2 text-base sm:text-sm leading-relaxed text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
+
+          {hasSpeechSupport && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={toggleVoice}
+              disabled={disabled}
+              className={cn(
+                "h-9 w-9 shrink-0 rounded-full transition-colors",
+                isListening
+                  ? "bg-blue-100 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400"
+                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+              )}
+            >
+              <Mic className="h-5 w-5" />
+              <span className="sr-only">{isListening ? "Stop recording" : "Start recording"}</span>
+            </Button>
+          )}
 
           <Button
             type="submit"
             size="icon"
             disabled={disabled || (!message.trim() && !image)}
+            title={disabled ? "Wait for the response to finish" : undefined}
             className="h-9 w-9 shrink-0 rounded-full bg-foreground text-background hover:bg-foreground/90 disabled:opacity-30"
           >
             <Send className="h-4 w-4" />
