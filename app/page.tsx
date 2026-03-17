@@ -209,14 +209,29 @@ export default function Home() {
       ? getCityAesthetic(locationContext.location)
       : null;
 
-    // Convert image to base64 for vision API
+    // Convert image to base64 for vision API — resize to max 1024px first to stay under Vercel's 4.5MB payload limit
     let imageBase64: string | undefined;
     if (imageToSend) {
       imageBase64 = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve((reader.result as string).split(",")[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(imageToSend);
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(imageToSend);
+        img.onload = () => {
+          const MAX = 1024;
+          let { width, height } = img;
+          if (width > MAX || height > MAX) {
+            if (width > height) { height = Math.round(height * MAX / width); width = MAX; }
+            else { width = Math.round(width * MAX / height); height = MAX; }
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          canvas.getContext("2d")!.drawImage(img, 0, 0, width, height);
+          URL.revokeObjectURL(objectUrl);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
+          resolve(dataUrl.split(",")[1]);
+        };
+        img.onerror = reject;
+        img.src = objectUrl;
       });
     }
 
