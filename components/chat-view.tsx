@@ -5,13 +5,9 @@ import { ChatInput } from "@/components/chat-input";
 import { ChatMessage, Message } from "@/components/chat-message";
 import { StarterChips } from "@/components/starter-chips";
 import { Pin, PinOff, Sparkles } from "lucide-react";
-import {
-  getPersonaBgClass,
-  getPersonaTextClass,
-} from "@/components/persona-selector";
+import { getPersonaBgClass } from "@/components/persona-selector";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 
 interface ChatViewProps {
   messages: Message[];
@@ -19,7 +15,6 @@ interface ChatViewProps {
   onStarterSelect: (prompt: string) => void;
   isPinned: boolean;
   onTogglePin: () => void;
-  chatTitle?: string;
   isLoading?: boolean;
 }
 
@@ -71,13 +66,11 @@ export function ChatView({
   onStarterSelect,
   isPinned,
   onTogglePin,
-  chatTitle,
   isLoading = false,
 }: ChatViewProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const isEmpty = messages.length === 0;
   const bgClass = getPersonaBgClass("brutal-editor");
-  const textClass = getPersonaTextClass("brutal-editor");
 
   // Scroll to bottom when new messages arrive
   React.useEffect(() => {
@@ -87,15 +80,10 @@ export function ChatView({
   }, [messages]);
 
   return (
-    <div className="flex h-full flex-col">
+    <div className={`flex h-full flex-col transition-colors duration-300 ${bgClass}`}>
       {/* Header */}
-      <header className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div className="flex items-center gap-3">
-          <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
-          {chatTitle && (
-            <h2 className="text-sm font-medium text-foreground">{chatTitle}</h2>
-          )}
-        </div>
+      <header className="flex h-14 items-center justify-between px-6">
+        <h1 className="font-serif text-lg font-semibold tracking-tight text-foreground">Drape</h1>
         {!isEmpty && (
           <Button
             variant="ghost"
@@ -119,12 +107,11 @@ export function ChatView({
       </header>
 
       {/* Chat Area */}
-      <div className={`flex-1 overflow-hidden transition-colors duration-300 ${bgClass}`}>
+      <div className="flex-1 overflow-hidden">
         {isEmpty ? (
           <div className="flex h-full flex-col items-center justify-center px-4">
             <div className="w-full max-w-2xl">
-
-              <h1 className={`mb-6 flex items-center justify-center gap-2 text-3xl font-medium ${textClass}`}>
+              <h1 className="mb-6 flex items-center justify-center gap-2 text-3xl font-medium text-foreground">
                 <Sparkles className="h-7 w-7" />
                 Welcome
               </h1>

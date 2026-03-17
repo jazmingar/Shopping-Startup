@@ -11,16 +11,15 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
-  SidebarFooter,
   SidebarSeparator,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import {
   Plus,
   Pin,
   MessageSquare,
-  Settings,
-  Sparkles,
   Clock,
+  Menu,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -51,18 +50,19 @@ export function AppSidebar({
   onNewChat,
   onSelectChat,
 }: AppSidebarProps) {
+  const { toggleSidebar, state } = useSidebar();
+  const isCollapsed = state === "collapsed";
+
   return (
-    <Sidebar className="border-r border-sidebar-border">
-      <SidebarHeader className="p-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground">
-            <Sparkles className="h-5 w-5 text-background" />
-          </div>
-          <div>
-            <h1 className="font-serif text-lg font-semibold tracking-tight text-sidebar-foreground">
-              Drape
-            </h1>
-          </div>
+    <Sidebar collapsible="icon" className="border-r border-sidebar-border">
+      <SidebarHeader className="p-0">
+        <div className={`flex h-14 items-center px-3 ${isCollapsed ? "justify-center" : "justify-start"}`}>
+          <button
+            onClick={toggleSidebar}
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
         </div>
       </SidebarHeader>
 
@@ -81,10 +81,10 @@ export function AppSidebar({
           </SidebarMenu>
         </SidebarGroup>
 
-        <SidebarSeparator />
+        {!isCollapsed && <SidebarSeparator />}
 
         {/* Pinned Chats */}
-        {pinnedChats.length > 0 && (
+        {!isCollapsed && pinnedChats.length > 0 && (
           <SidebarGroup>
             <SidebarGroupLabel className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-sidebar-foreground/50">
               <Pin className="h-3 w-3" />
@@ -113,7 +113,7 @@ export function AppSidebar({
         )}
 
         {/* Recent Chats */}
-        {recentChats.length > 0 && (
+        {!isCollapsed && recentChats.length > 0 && (
           <SidebarGroup>
             <SidebarGroupLabel className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-sidebar-foreground/50">
               <Clock className="h-3 w-3" />
@@ -142,16 +142,6 @@ export function AppSidebar({
         )}
       </SidebarContent>
 
-      <SidebarFooter className="p-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton className="justify-start gap-3 rounded-lg">
-              <Settings className="h-4 w-4" />
-              <span>Settings</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
     </Sidebar>
   );
 }

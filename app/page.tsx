@@ -36,6 +36,14 @@ export default function Home() {
 
   const [pinnedChats, setPinnedChats] = React.useState<PinnedChat[]>([]);
   const [recentChats, setRecentChats] = React.useState<RecentChat[]>([]);
+  const [allChatMessages, setAllChatMessages] = React.useState<Record<string, Message[]>>({});
+
+  // Save the current chat's messages before navigating away
+  const saveCurrentChat = React.useCallback((currentActiveChat: string | null, currentMessages: Message[]) => {
+    if (currentActiveChat && currentMessages.length > 0) {
+      setAllChatMessages(prev => ({ ...prev, [currentActiveChat]: currentMessages }));
+    }
+  }, []);
 
 
   // Onboarding — shown on first visit, hidden once complete or skipped
@@ -355,6 +363,7 @@ export default function Home() {
   };
 
   const handleNewChat = () => {
+    saveCurrentChat(activeChat, messages);
     setMessages([]);
     setChatTitle(undefined);
     setIsPinned(false);
@@ -362,13 +371,13 @@ export default function Home() {
   };
 
   const handleSelectChat = (id: string) => {
+    saveCurrentChat(activeChat, messages);
     setActiveChat(id);
     const pinnedChat = pinnedChats.find((c) => c.id === id);
     const recentChat = recentChats.find((c) => c.id === id);
     setChatTitle(pinnedChat?.title || recentChat?.title);
     setIsPinned(!!pinnedChat);
-    
-    setMessages([]);
+    setMessages(allChatMessages[id] || []);
   };
 
   const handleTogglePin = () => {
@@ -410,7 +419,6 @@ export default function Home() {
             onStarterSelect={handleStarterSelect}
             isPinned={isPinned}
             onTogglePin={handleTogglePin}
-            chatTitle={chatTitle}
             isLoading={isLoading}
           />
       </SidebarInset>
