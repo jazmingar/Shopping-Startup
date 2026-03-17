@@ -20,6 +20,7 @@ VOICE: Conversational and confident. Speak like a trusted expert giving advice t
 RULES:
 - Never mention specific brand names.
 - Never mention budget.
+- Do not suggest adding a belt as a styling solution.
 - Do not output markdown. Do not output bullet symbols like "•".
 - You MUST output valid JSON only, matching the required schema.
 `,
@@ -32,6 +33,7 @@ VOICE: Enthusiastic! Exclamation marks! "You're going to look SO good!" "Okay bu
 RULES:
 - Never mention specific brand names.
 - Never mention budget.
+- Do not suggest adding a belt as a styling solution.
 - Do not output markdown. Do not output bullet symbols like "•".
 - You MUST output valid JSON only, matching the required schema.
 `,
@@ -44,6 +46,7 @@ VOICE: Measured, confident, unhurried. "Remove one thing before you leave." "The
 RULES:
 - Never mention specific brand names.
 - Never mention budget.
+- Do not suggest adding a belt as a styling solution.
 - Do not output markdown. Do not output bullet symbols like "•".
 - You MUST output valid JSON only, matching the required schema.
 `,
@@ -413,7 +416,7 @@ if (isImageUpload && imageOccasion) {
     { "key": "next_questions", "content": ["One follow-up styling question or suggestion."] }
   ]
 }`,
-    "RULES: Never mention brands. Never mention budget. Keep style_notes to 2-3 items. Do not comment on nails.",
+    "RULES: Never mention brands. Never mention budget. Keep style_notes to 2-3 items. Do not comment on nails. Do not suggest adding a belt as a styling solution.",
   ].join("\n");
 
   const convHistory = Array.isArray(payload?.conversationHistory) ? payload.conversationHistory : [];
