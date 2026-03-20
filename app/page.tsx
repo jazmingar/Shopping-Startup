@@ -14,6 +14,7 @@ import {
   getCityAesthetic,
 } from "@/lib/location";
 import { fetchWeatherByCoords, fetchWeatherByLocation } from "@/lib/weather";
+import { resolveIntentFromText } from "@/lib/resolve-intent";
 import { Onboarding } from "@/components/onboarding";
 import {
   hasCompletedOnboarding,
@@ -169,17 +170,21 @@ export default function Home() {
       setRecentChats((prev) => [{ id: newChatId, title, timestamp: new Date() }, ...prev]);
     }
 
-    // Determine if this is a followup request
-    const isFollowup = hasShownOptions();
-    const focusSlot = isFollowup ? detectOptionSlot(content) : null;
-    // Default to modifying all options unless a specific slot is mentioned
-    const modifyingAll = isFollowup && !focusSlot;
-
     // Pass the last known intent so the route can anchor clarifying follow-ups
     const lastKnownIntent = [...messages]
       .reverse()
       .find(m => m.role === "assistant" && m.structuredResponse?.intent)
       ?.structuredResponse?.intent;
+
+    // Determine if this is a followup request.
+    // Only treat as refine if options have been shown AND the new message doesn't
+    // resolve to a different intent — otherwise it's a new thread, start fresh.
+    const newIntent = resolveIntentFromText(content);
+    const isNewThread = !!newIntent && newIntent !== lastKnownIntent;
+    const isFollowup = hasShownOptions() && !isNewThread;
+    const focusSlot = isFollowup ? detectOptionSlot(content) : null;
+    // Default to modifying all options unless a specific slot is mentioned
+    const modifyingAll = isFollowup && !focusSlot;
 
     // Capture industry from any message (explicit answer or volunteered info)
     const lastAssistant = [...messages].reverse().find(m => m.role === "assistant");

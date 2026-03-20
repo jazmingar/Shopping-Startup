@@ -73,10 +73,9 @@ RULES:
 `,
 };
 
+import { normalize, resolveIntentFromText } from "@/lib/resolve-intent";
+
 // --- Week 2: Pure intent mapping (persona must NOT affect intent) ---
-function normalize(text: string) {
-  return text.toLowerCase().replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
-}
 
 /**
  * Strict occasion resolver used for image uploads only.
@@ -95,131 +94,6 @@ function resolveOccasionFromImage(userText: string): Intent | null {
   return null;
 }
 
-function resolveIntentFromText(userText: string): Intent | null {
-  const t = normalize(userText);
-
-  // wedding signals (highest priority for specificity)
-  if (
-    t.includes("wedding") ||
-    t.includes("bridal") ||
-    t.includes("bachelorette") ||
-    t.includes("rehearsal") ||
-    t.includes("engagement")
-  )
-    return "wedding_event";
-
-  // travel signals
-  if (
-    t.includes("travel") ||
-    t.includes("trip") ||
-    t.includes("vacation") ||
-    t.includes("girls trip") ||
-    t.includes("ski trip") ||
-    t.includes("beach trip") ||
-    t.includes("going to") ||
-    t.includes("flying to") ||
-    t.includes("packing for") ||
-    (t.includes("weekend") && (t.includes("away") || t.includes("getaway")))
-  )
-    return "travel";
-
-  // pregnancy signals
-  if (
-    t.includes("pregnant") ||
-    t.includes("pregnancy") ||
-    t.includes("maternity") ||
-    t.includes("expecting") ||
-    t.includes("baby shower") ||
-    t.includes("trimester") ||
-    t.includes("postpartum") ||
-    t.includes("nursing")
-  )
-    return "pregnancy";
-
-  // work/professional signals
-  if (
-    t.includes("work") ||
-    t.includes("office") ||
-    t.includes("meeting") ||
-    t.includes("client") ||
-    t.includes("presentation") ||
-    t.includes("conference") ||
-    t.includes("interview") ||
-    t.includes("professional") ||
-    t.includes("job") ||
-    t.includes("startup") ||
-    t.includes("salary") ||
-    t.includes("networking") ||
-    t.includes("business casual") ||
-    t.includes("smart casual") ||
-    t.includes("dress code") ||
-    t.includes("panel") ||
-    t.includes("promoted") ||
-    t.includes("promotion")
-  )
-    return "professional";
-
-  // date signals
-  if (
-    t.includes("date") ||
-    t.includes("first date") ||
-    t.includes("date night") ||
-    t.includes("hinge") ||
-    t.includes("bumble") ||
-    t.includes("tinder")
-  )
-    return "date";
-
-  // seasonality signals
-  if (
-    t.includes("fall") ||
-    t.includes("winter") ||
-    t.includes("spring") ||
-    t.includes("summer") ||
-    t.includes("autumn") ||
-    t.includes("seasonal") ||
-    t.includes("halloween") ||
-    t.includes("trend")
-  )
-    return "seasonality";
-
-  // social signals (lower priority, more generic)
-  if (
-    t.includes("night out") ||
-    t.includes("going out") ||
-    t.includes("club") ||
-    t.includes("bar") ||
-    t.includes("concert") ||
-    t.includes("party") ||
-    t.includes("girls night") ||
-    t.includes("brunch") ||
-    t.includes("rooftop") ||
-    t.includes("birthday") ||
-    t.includes("bbq") ||
-    t.includes("cookout") ||
-    t.includes("gala") ||
-    t.includes("invited") ||
-    (t.includes("dinner") && (t.includes("friend") || t.includes("girls"))) ||
-    (t.includes("girls") && (t.includes("night") || t.includes("out") || t.includes("dinner") || t.includes("brunch")))
-  )
-    return "social";
-
-  // Generic fashion/outfit requests (catch-all fallback)
-  // Match any generic request that mentions outfit, style, wear, dress, look, etc.
-  if (
-    t.includes("outfit") ||
-    t.includes("wear") ||
-    t.includes("style") ||
-    t.includes("dress") ||
-    t.includes("look") ||
-    t.includes("clothes") ||
-    t.includes("fashion") ||
-    t.includes("help")
-  )
-    return "social";
-
-  return null;
-}
 
 // Defensive: extract last user message from either `messages` array or `userQuery`
 function getLatestUserQuery(payload: any): string {
