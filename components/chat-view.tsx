@@ -7,7 +7,6 @@ import { StarterChips } from "@/components/starter-chips";
 import { Pin, PinOff, Sparkles, Menu } from "lucide-react";
 import { getPersonaBgClass } from "@/components/persona-selector";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSidebar } from "@/components/ui/sidebar";
 
 interface ChatViewProps {
@@ -71,15 +70,15 @@ export function ChatView({
   isLoading = false,
   userName,
 }: ChatViewProps) {
-  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const isEmpty = messages.length === 0;
   const bgClass = getPersonaBgClass("brutal-editor");
   const { toggleSidebar, isMobile } = useSidebar();
 
   // Scroll to bottom when new messages arrive
   React.useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -140,15 +139,14 @@ export function ChatView({
             </div>
           </div>
         ) : (
-          <ScrollArea className="h-full">
+          <div ref={scrollContainerRef} className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl space-y-6 px-3 py-4 sm:px-4 sm:py-6">
               {messages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))}
               {isLoading && <ThinkingIndicator />}
-              <div ref={scrollRef} />
             </div>
-          </ScrollArea>
+          </div>
         )}
       </div>
 

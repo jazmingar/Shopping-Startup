@@ -114,9 +114,7 @@ function StructuredResponse({
                   <div className="space-y-3">
                     {section.content.map((change, changeIdx) => (
                       <div key={changeIdx} className="space-y-2">
-                        <h4 className="font-medium text-foreground">
-                          {"slot" in change && change.slot ? `Look ${change.slot}: ` : ""}{change.title}
-                        </h4>
+                        <h4 className="font-medium text-foreground">{change.title}</h4>
                         <ul className="space-y-1 text-sm text-muted-foreground">
                           {change.changes.map((ch, chIdx) => (
                             <li key={chIdx}>• {ch}</li>
@@ -152,8 +150,8 @@ function StructuredResponse({
           return (
             <React.Fragment key={idx}>
               <div className="rounded-lg border-l-4 border-accent bg-accent/5 p-3">
-                <p className="text-xs font-semibold uppercase tracking-wide text-accent-foreground mb-1.5">Editor's Note</p>
-                <div className="space-y-1 text-sm italic text-foreground">
+                <p className="text-xs font-semibold uppercase tracking-wide text-blue-900 dark:text-blue-300 mb-1.5">Editor's Note</p>
+                <div className="space-y-1 text-sm italic text-blue-900 dark:text-blue-200">
                   {section.content.map((note, noteIdx) => (
                     <p key={noteIdx}>{note}</p>
                   ))}

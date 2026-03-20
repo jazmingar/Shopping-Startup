@@ -58,6 +58,11 @@ export function AppSidebar({
     if (isMobile) setOpenMobile(false);
   };
 
+  const handleSelectChat = (id: string) => {
+    onSelectChat(id);
+    if (isMobile) setOpenMobile(false);
+  };
+
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border">
       <SidebarHeader className="p-0">
@@ -100,7 +105,7 @@ export function AppSidebar({
                 {pinnedChats.map((chat) => (
                   <SidebarMenuItem key={chat.id}>
                     <SidebarMenuButton
-                      onClick={() => onSelectChat(chat.id)}
+                      onClick={() => handleSelectChat(chat.id)}
                       isActive={activeChat === chat.id}
                       className={cn(
                         "justify-start gap-3 rounded-lg",
@@ -129,7 +134,7 @@ export function AppSidebar({
                 {recentChats.map((chat) => (
                   <SidebarMenuItem key={chat.id}>
                     <SidebarMenuButton
-                      onClick={() => onSelectChat(chat.id)}
+                      onClick={() => handleSelectChat(chat.id)}
                       isActive={activeChat === chat.id}
                       className={cn(
                         "justify-start gap-3 rounded-lg",

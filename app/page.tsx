@@ -34,9 +34,26 @@ export default function Home() {
   const [activeChat, setActiveChat] = React.useState<string | null>(null);
   const [chatTitle, setChatTitle] = React.useState<string | undefined>(undefined);
 
-  const [pinnedChats, setPinnedChats] = React.useState<PinnedChat[]>([]);
-  const [recentChats, setRecentChats] = React.useState<RecentChat[]>([]);
-  const [allChatMessages, setAllChatMessages] = React.useState<Record<string, Message[]>>({});
+  const [pinnedChats, setPinnedChats] = React.useState<PinnedChat[]>(() => {
+    try { return JSON.parse(localStorage.getItem("drape_pinned_chats") || "[]"); } catch { return []; }
+  });
+  const [recentChats, setRecentChats] = React.useState<RecentChat[]>(() => {
+    try { return JSON.parse(localStorage.getItem("drape_recent_chats") || "[]"); } catch { return []; }
+  });
+  const [allChatMessages, setAllChatMessages] = React.useState<Record<string, Message[]>>(() => {
+    try { return JSON.parse(localStorage.getItem("drape_chat_messages") || "{}"); } catch { return {}; }
+  });
+
+  // Persist chat data to localStorage
+  React.useEffect(() => {
+    try { localStorage.setItem("drape_pinned_chats", JSON.stringify(pinnedChats)); } catch {}
+  }, [pinnedChats]);
+  React.useEffect(() => {
+    try { localStorage.setItem("drape_recent_chats", JSON.stringify(recentChats)); } catch {}
+  }, [recentChats]);
+  React.useEffect(() => {
+    try { localStorage.setItem("drape_chat_messages", JSON.stringify(allChatMessages)); } catch {}
+  }, [allChatMessages]);
 
   // Save the current chat's messages before navigating away
   const saveCurrentChat = React.useCallback((currentActiveChat: string | null, currentMessages: Message[]) => {
@@ -76,11 +93,22 @@ export default function Home() {
   // Stores an uploaded image when the LLM asks a clarifying question — re-sent on next turn
   const pendingImageRef = React.useRef<File | null>(null);
 
-  // Weather — fetched once on load via browser geolocation, overridden by travel location
+  // Weather — fetched once on load via browser geolocation, cached in localStorage for 24h
   const [weather, setWeather] = React.useState<string | undefined>(undefined);
   const weatherLocationRef = React.useRef<string | null>(null);
 
   React.useEffect(() => {
+    // Check cache first — avoid re-prompting for location on every session
+    try {
+      const cached = localStorage.getItem("drape_weather");
+      const cachedAt = Number(localStorage.getItem("drape_weather_at") || "0");
+      if (cached && Date.now() - cachedAt < 24 * 60 * 60 * 1000) {
+        setWeather(cached);
+        weatherLocationRef.current = "geolocation";
+        return;
+      }
+    } catch {}
+
     if (typeof navigator === "undefined" || !navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
@@ -88,6 +116,10 @@ export default function Home() {
         if (w) {
           setWeather(w);
           weatherLocationRef.current = "geolocation";
+          try {
+            localStorage.setItem("drape_weather", w);
+            localStorage.setItem("drape_weather_at", String(Date.now()));
+          } catch {}
         }
       },
       () => {} // silently ignore — permission denied or unavailable

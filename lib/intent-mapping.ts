@@ -17,7 +17,7 @@ import { getEditorialExamples } from "./editorial-copy";
  */
 
 export type IntentPromptConfig = {
-  /** A short “bias” paragraph unique to the intent */
+  /** A short "bias" paragraph unique to the intent */
   intentBias: string;
 
   /**
@@ -235,10 +235,10 @@ export function buildIntentPromptPack(args: {
       ? [
           "ROLE INFERENCE (important):",
           "- Determine whether the user is a wedding guest or the bride/partner getting married.",
-          '- If the query mentions phrases like: "my wedding", "getting married", "bridal", "my bachelorette", "my rehearsal dinner", "engagement photos", treat the user as BRIDE/PARTNER.',
-          '- If the query mentions: "guest", "attending a wedding", "friend’s wedding", "my cousin’s wedding", "bridesmaid", treat the user as GUEST.',
+          "- BRIDE/PARTNER signals: my wedding, getting married, my bachelorette, my rehearsal dinner, engagement photos.",
+          "- GUEST signals (definitive — do NOT ask for clarification): any possessive before the event type, e.g. friend’s wedding, friend’s bridal shower, sister’s bachelorette, cousin’s wedding, colleague’s bridal. Also: guest, attending a wedding, bridesmaid.",
           "- Apply etiquette accordingly.",
-          "- If role is unclear, ask in next_questions: “Are you the bride or a guest?”",
+          "- Only ask if they are the bride or a guest when there is genuinely no way to infer the role from context.",
           "",
         ].join("\n")
       : "";
