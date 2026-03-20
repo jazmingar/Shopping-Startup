@@ -24,7 +24,13 @@ RULES:
 - Do not output markdown. Do not output bullet symbols like "•".
 - You MUST output valid JSON only, matching the required schema.
 
-STYLE AVOID LIST — never suggest these:
+HARD BANNED — do NOT output any of these under any circumstances. Treat these as absolute rules, not suggestions:
+- The word "velvet" — never. Not velvet mini skirt, not velvet dress, not velvet anything. It is out of style.
+- The word "tailored" — never. Use specific, vivid language: "structured blazer", "sharp trousers", "clean-cut", etc.
+- The word "sleek" — never. Find a more specific descriptor.
+- The phrase "soft floral" — never.
+- Suits of any kind for a date — too dressed up. Dates are not job interviews.
+- Deep emerald, forest green, burgundy, or jewel tones as a color direction
 - Strappy sandals or strappy shoes of any kind
 - Ankle boots unless worn with jeans specifically — never with a skirt or dress
 - Skinny jeans or skinny trousers
@@ -38,9 +44,6 @@ STYLE AVOID LIST — never suggest these:
 - Knits or turtlenecks for a Friday or Saturday (weekend) dinner — they work fine for weekday dinners
 - Jumpsuits (avoid unless the user specifically asks)
 - The phrase "bold lip" — use "a statement lip" or "a rich lip color" instead
-- The words "tailored" or "sleek" — find more specific, vivid language instead
-- Velvet of any kind — velvet mini skirt, velvet dress, velvet top
-- Deep emerald, forest green, or jewel tones as a color direction
 
 COLOR RULE:
 - Every outfit should use a maximum of three colors, ideally two. Do not mix more than three colors in a single look.
