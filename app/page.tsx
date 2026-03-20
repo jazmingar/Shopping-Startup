@@ -25,6 +25,12 @@ import {
   extractIndustryFromMessage,
   StyleProfile,
 } from "@/lib/style-profile";
+import {
+  trackSession,
+  trackMessage,
+  computeJourneyStage,
+  type JourneyStage,
+} from "@/lib/engagement-tracker";
 
 
 
@@ -67,6 +73,7 @@ export default function Home() {
   // Onboarding — shown on first visit, hidden once complete or skipped
   const [showOnboarding, setShowOnboarding] = React.useState(false);
   const [styleProfile, setStyleProfile] = React.useState<StyleProfile | null>(null);
+  const [journeyStage, setJourneyStage] = React.useState<JourneyStage>("discovering");
 
   React.useEffect(() => {
     if (!hasCompletedOnboarding()) {
@@ -74,6 +81,8 @@ export default function Home() {
     } else {
       setStyleProfile(getStyleProfile());
     }
+    trackSession();
+    setJourneyStage(computeJourneyStage());
   }, []);
 
   const handleOnboardingComplete = () => {
@@ -161,6 +170,10 @@ export default function Home() {
 
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
+
+    // Track engagement signal and refresh journey stage
+    trackMessage(content, !!imageToSend);
+    setJourneyStage(computeJourneyStage());
 
     if (!chatTitle) {
       const title = content.length > 30 ? content.slice(0, 30) + "..." : content;
@@ -309,6 +322,7 @@ export default function Home() {
             // Style profile from onboarding
             styleProfile: styleProfile ? formatStyleProfileForPrompt(styleProfile) : undefined,
           },
+          journeyStage,
         }),
       });
 

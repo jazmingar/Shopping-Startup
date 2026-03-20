@@ -258,6 +258,8 @@ export async function POST(req: Request) {
     const responseType: ResponseType =
       isWardrobeGap ? "wardrobe_gap" : effectiveMode === "refine" ? "followup" : "initial";
 
+    const journeyStage: string = payload?.journeyStage || "exploring";
+
     // Optional userContext (keep small to control tokens)
     const userContext = payload?.userContext as
       | {
@@ -451,6 +453,20 @@ if (!resolvedIntent) {
       wardrobeGapShownItems,
     });
 
+    // Journey stage tone directive — adjusts how much explanation/hand-holding to give
+    const journeyToneMap: Record<string, string> = {
+      discovering: `USER CONTEXT: This user is new to getting styled and still figuring out what works for them — an unsure dresser who needs more guidance than most.
+- Be warm, reassuring, and easy to follow. They may not know style terminology.
+- In outfit descriptions, briefly explain WHY the look works (e.g. "the knee highs elongate the leg", "this proportion balances a fitted top with volume below").
+- In the style_notes section, include one practical tip they can act on immediately (e.g. "start with all-black as your base — it's the easiest way to look intentional").
+- In next_questions, be encouraging and open-ended — invite them to share more about their life so you can help them better.
+- Avoid assuming they own specific pieces. Be inclusive about what "counts."`,
+      exploring: "USER CONTEXT: This user has some style awareness but is still building confidence. Balance editorial direction with brief explanations where helpful.",
+      developing: "USER CONTEXT: This user is style-aware and engaged — they've uploaded outfits and ask specific questions. Skip basic explanations. Be direct and editorial. They can handle a strong point of view.",
+      confident: "USER CONTEXT: This user is highly fashion-literate. Treat them as a peer. Use precise style language, reference silhouettes and proportions directly, skip any hand-holding.",
+    };
+    const journeyDirective = journeyToneMap[journeyStage] ?? journeyToneMap["exploring"];
+
     // Add a small hard reminder at the system-level too (belt + suspenders)
     const hardContractReminder = `
 HARD REMINDER:
@@ -458,7 +474,7 @@ HARD REMINDER:
 - If responseType is "followup", DO NOT output any "options" arrays anywhere.
 `.trim();
 
-    const systemMessage = [personaSystem.trim(), intentSystem.trim(), hardContractReminder].join(
+    const systemMessage = [personaSystem.trim(), journeyDirective, intentSystem.trim(), hardContractReminder].join(
       "\n\n"
     );
 
