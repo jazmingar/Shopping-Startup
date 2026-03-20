@@ -355,6 +355,27 @@ export function buildIntentPromptPack(args: {
                 "- If industry is missing, include it as part of your clarifying question even if other context is present.",
               ]
             : []),
+
+          ...(intent === "date"
+            ? [
+                "DATE INTENT CLARIFYING RULE:",
+                "- If the date context is vague (no venue type, no setting), ask ONE question that covers: (1) the venue vibe — casual spot or a nicer restaurant, indoors or outdoors, and (2) which date number it is if not clear (first date vs established relationship changes the look significantly).",
+                "- Good example: 'Is this more of a casual spot or a nicer restaurant — and is this a first date or are you already seeing each other?'",
+                "- Do NOT ask about activities planned after the date. Do NOT ask what impression they want to leave — infer it.",
+              ]
+            : []),
+
+          ...(intent === "wedding_event" && userQuery.toLowerCase().includes("bridal shower")
+            ? [
+                "BRIDAL SHOWER CLARIFYING RULE:",
+                "- Always ask ONE clarifying question before recommending: cover indoor vs outdoor, general location or climate (e.g. warm vs cold), the time of year if not obvious from weather data, and the dress code vibe (garden party, chic brunch, casual, etc.).",
+                "- Good example: 'Is this indoors or outdoors, and what is the general vibe — garden party, brunch chic, or more casual? Also, where is it being held so I can factor in the climate.'",
+              ]
+            : []),
+
+          "NEVER ASK:",
+          "- What activities the user has planned after the venue (e.g. 'what are you doing after the bar?') — this is intrusive and irrelevant.",
+          "- Redundant questions if the answer is already clear from context.",
           "",
           "CLARIFYING RESPONSE SHAPE:",
           `{
