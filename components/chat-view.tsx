@@ -71,14 +71,23 @@ export function ChatView({
   userName,
 }: ChatViewProps) {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const lastMessageRef = React.useRef<HTMLDivElement>(null);
   const isEmpty = messages.length === 0;
   const bgClass = getPersonaBgClass("brutal-editor");
   const { toggleSidebar, isMobile } = useSidebar();
 
-  // Scroll to bottom when new messages arrive
   React.useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const lastMsg = messages[messages.length - 1];
+    if (lastMsg?.role === "assistant" && lastMessageRef.current) {
+      // Scroll so the top of the new assistant response is visible
+      const msgTop = lastMessageRef.current.getBoundingClientRect().top;
+      const containerTop = container.getBoundingClientRect().top;
+      container.scrollTop += msgTop - containerTop - 16;
+    } else {
+      // User message or loading — scroll to bottom to show thinking indicator
+      container.scrollTop = container.scrollHeight;
     }
   }, [messages]);
 
@@ -141,8 +150,10 @@ export function ChatView({
         ) : (
           <div ref={scrollContainerRef} className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl space-y-6 px-3 py-4 sm:px-4 sm:py-6">
-              {messages.map((message) => (
-                <ChatMessage key={message.id} message={message} />
+              {messages.map((message, idx) => (
+                <div key={message.id} ref={idx === messages.length - 1 ? lastMessageRef : null}>
+                  <ChatMessage message={message} />
+                </div>
               ))}
               {isLoading && <ThinkingIndicator />}
             </div>
