@@ -32,6 +32,57 @@ import {
   type JourneyStage,
 } from "@/lib/engagement-tracker";
 
+/**
+ * Returns only the conversation history relevant to the current intent thread.
+ *
+ * - Follow-up (isNewThread=false): messages since the last intent switch — keeps
+ *   the current thread clean without mixing in prior topics.
+ * - New thread (isNewThread=true): messages from prior turns that share the same
+ *   intent — so returning to "dinner" restores the original dinner context.
+ *   If the intent has never been seen before, returns empty.
+ */
+function buildRelevantHistory(
+  messages: Message[],
+  isNewThread: boolean,
+  targetIntent: string | null
+): { role: string; content: string }[] {
+  if (!isNewThread) {
+    // Walk backwards to find where the current thread started (last intent switch)
+    let threadStart = 0;
+    for (let i = messages.length - 1; i >= 0; i--) {
+      const m = messages[i];
+      if (
+        m.role === "assistant" &&
+        m.structuredResponse?.intent &&
+        m.structuredResponse.intent !== targetIntent
+      ) {
+        threadStart = i + 1;
+        break;
+      }
+    }
+    return messages.slice(threadStart).map(m => ({ role: m.role, content: m.content || "" }));
+  }
+
+  // New thread: pull messages from prior segments that match the target intent
+  if (!targetIntent) return [];
+  const result: { role: string; content: string }[] = [];
+  let pendingUser: { role: string; content: string } | null = null;
+  for (const m of messages) {
+    if (m.role === "user") {
+      pendingUser = { role: "user", content: m.content || "" };
+    } else if (m.role === "assistant") {
+      if (m.structuredResponse?.intent === targetIntent) {
+        if (pendingUser) result.push(pendingUser);
+        result.push({ role: "assistant", content: m.content || "" });
+        pendingUser = null;
+      } else {
+        pendingUser = null; // user message led to a different intent — discard it
+      }
+    }
+  }
+  return result;
+}
+
 
 
 export default function Home() {
@@ -304,11 +355,7 @@ export default function Home() {
                 ?.items?.map((i: any) => i.name) ?? []
             : [],
           imageBase64: imageBase64 || undefined,
-          // New intent = fresh context. Don't bleed prior outfit suggestions into unrelated questions.
-          conversationHistory: isNewThread ? [] : messages.map(m => ({
-            role: m.role,
-            content: m.content || "",
-          })),
+          conversationHistory: buildRelevantHistory(messages, isNewThread, newIntent ?? lastKnownIntent ?? null),
           // Location context
           userContext: {
             location: locationContext.location,
