@@ -304,7 +304,8 @@ export default function Home() {
                 ?.items?.map((i: any) => i.name) ?? []
             : [],
           imageBase64: imageBase64 || undefined,
-          conversationHistory: messages.map(m => ({
+          // New intent = fresh context. Don't bleed prior outfit suggestions into unrelated questions.
+          conversationHistory: isNewThread ? [] : messages.map(m => ({
             role: m.role,
             content: m.content || "",
           })),
