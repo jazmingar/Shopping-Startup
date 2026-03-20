@@ -366,9 +366,9 @@ export function getImageForSlot(
     });
 
   // Only return an image if it meets a minimum confidence threshold.
-  // Score 8 = climate match (4) + clothingType match (3) + aesthetic or colorStory match (1+).
-  // Below this, the image won't match the text well enough to show.
-  const MIN_SCORE = 8;
+  // Score 9 = climate (4) + clothingType (3) + aesthetic (2) — all three must align.
+  // Score 8 and below means aesthetic or clothingType didn't match — image won't look right.
+  const MIN_SCORE = 9;
   const best = scored.find(({ score, img }) => score >= MIN_SCORE && !excludeUrls.includes(img.url));
   if (!best) return "";
   return best.img.url;
