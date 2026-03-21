@@ -11,6 +11,7 @@ export interface Message {
   content?: string;
   structuredResponse?: LlmResponse;
   image?: string;
+  images?: string[]; // multiple uploaded images
   // For structured responses: [slot1Url, slot2Url, slot3Url]
   // For non-structured (demo / lookbook): any number of URLs
   inspirationImages?: string[];
@@ -258,11 +259,24 @@ export function ChatMessage({ message }: ChatMessageProps) {
           isUser ? "max-w-[85%] flex flex-col items-end" : "w-full"
         )}
       >
-        {/* User Image Attachment */}
-        {isUser && message.image && (
+        {/* User Image Attachment(s) */}
+        {isUser && (message.images?.length ?? 0) > 0 && (
+          <div className="flex flex-wrap gap-2 justify-end">
+            {message.images!.map((src, i) => (
+              <div key={i} className="overflow-hidden rounded-xl">
+                <img
+                  src={src}
+                  alt={`Uploaded outfit ${i + 1}`}
+                  className="h-48 w-auto max-w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+        {isUser && !message.images && message.image && (
           <div className="overflow-hidden rounded-xl">
             <img
-              src={message.image || "/placeholder.svg"}
+              src={message.image}
               alt="Uploaded outfit"
               className="h-48 w-auto max-w-full object-cover"
             />

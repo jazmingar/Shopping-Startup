@@ -151,8 +151,8 @@ export default function Home() {
   // Set to true when the LLM asks the wardrobe gap clarifying question — consumed on next send
   const wardrobeGapPendingRef = React.useRef(false);
 
-  // Stores an uploaded image when the LLM asks a clarifying question — re-sent on next turn
-  const pendingImageRef = React.useRef<File | null>(null);
+  // Stores uploaded images when the LLM asks a clarifying question — re-sent on next turn
+  const pendingImagesRef = React.useRef<File[]>([]);
 
   // Weather — fetched once via browser geolocation, cached for 7 days.
   // If user denies permission, we store that and never ask again.
@@ -214,16 +214,16 @@ export default function Home() {
   };
 
   // THE UPDATED BRAIN LOGIC
-  const handleSendMessage = async (content: string, image?: File) => {
-    // Use pending image (from a prior clarifying turn) if no new image was attached
-    const imageToSend = image ?? pendingImageRef.current ?? undefined;
-    pendingImageRef.current = null;
+  const handleSendMessage = async (content: string, images?: File[]) => {
+    // Use pending images (from a prior clarifying turn) if no new images were attached
+    const imagesToSend = (images && images.length > 0) ? images : (pendingImagesRef.current.length > 0 ? pendingImagesRef.current : undefined);
+    pendingImagesRef.current = [];
 
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content,
-      image: image ? URL.createObjectURL(image) : undefined,
+      images: images && images.length > 0 ? images.map((f) => URL.createObjectURL(f)) : undefined,
       timestamp: new Date(),
     };
 
@@ -231,7 +231,7 @@ export default function Home() {
     setIsLoading(true);
 
     // Track engagement signal and refresh journey stage
-    trackMessage(content, !!imageToSend);
+    trackMessage(content, !!imagesToSend?.length);
     setJourneyStage(computeJourneyStage());
 
     if (!chatTitle) {
@@ -319,12 +319,11 @@ export default function Home() {
       ? getCityAesthetic(locationContext.location)
       : null;
 
-    // Convert image to base64 for vision API — resize to max 1024px first to stay under Vercel's 4.5MB payload limit
-    let imageBase64: string | undefined;
-    if (imageToSend) {
-      imageBase64 = await new Promise<string>((resolve, reject) => {
+    // Convert images to base64 for vision API — resize each to max 1024px first
+    const resizeFile = (file: File): Promise<string> =>
+      new Promise((resolve, reject) => {
         const img = new Image();
-        const objectUrl = URL.createObjectURL(imageToSend);
+        const objectUrl = URL.createObjectURL(file);
         img.onload = () => {
           const MAX = 1024;
           let { width, height } = img;
@@ -337,13 +336,15 @@ export default function Home() {
           canvas.height = height;
           canvas.getContext("2d")!.drawImage(img, 0, 0, width, height);
           URL.revokeObjectURL(objectUrl);
-          const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
-          resolve(dataUrl.split(",")[1]);
+          resolve(canvas.toDataURL("image/jpeg", 0.8).split(",")[1]);
         };
         img.onerror = reject;
         img.src = objectUrl;
       });
-    }
+
+    const imagesBase64: string[] = imagesToSend
+      ? await Promise.all(imagesToSend.map(resizeFile))
+      : [];
 
     try {
       const response = await fetch("/api/chat", {
@@ -363,7 +364,7 @@ export default function Home() {
                 ?.find((s: any) => s.key === "wardrobe_items")
                 ?.items?.map((i: any) => i.name) ?? []
             : [],
-          imageBase64: imageBase64 || undefined,
+          imagesBase64: imagesBase64.length > 0 ? imagesBase64 : undefined,
           conversationHistory: buildRelevantHistory(messages, isNewThread, newIntent ?? lastKnownIntent ?? null),
           // Location context
           userContext: {
@@ -428,9 +429,9 @@ export default function Home() {
               wardrobeGapPendingRef.current = true;
             }
 
-            // If image was uploaded and LLM asked a clarifying question, hold the image for the next turn
-            if (isStructuredResponse && aiData.responseType === "clarifying" && imageToSend) {
-              pendingImageRef.current = imageToSend;
+            // If images were uploaded and LLM asked a clarifying question, hold them for the next turn
+            if (isStructuredResponse && aiData.responseType === "clarifying" && imagesToSend?.length) {
+              pendingImagesRef.current = imagesToSend;
             }
 
             setMessages((prev) => [...prev, assistantMessage]);

@@ -11,7 +11,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 
 interface ChatViewProps {
   messages: Message[];
-  onSendMessage: (message: string, image?: File) => void;
+  onSendMessage: (message: string, images?: File[]) => void;
   onStarterSelect: (prompt: string) => void;
   isPinned: boolean;
   onTogglePin: () => void;

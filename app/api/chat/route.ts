@@ -205,8 +205,13 @@ export async function POST(req: Request) {
    const effectiveMode: "initial" | "refine" = mode;
 
 
-    const imageBase64 = typeof payload?.imageBase64 === "string" ? payload.imageBase64 : null;
-    const isImageUpload = Boolean(imageBase64);
+    // Support both single imageBase64 (legacy) and imagesBase64 array
+    const imagesBase64: string[] = Array.isArray(payload?.imagesBase64)
+      ? payload.imagesBase64
+      : typeof payload?.imageBase64 === "string" && payload.imageBase64
+      ? [payload.imageBase64]
+      : [];
+    const isImageUpload = imagesBase64.length > 0;
 
     const isWardrobeGap = payload?.isWardrobeGap === true;
     const isWardrobeGapFollowup = payload?.isWardrobeGapFollowup === true;
@@ -280,7 +285,8 @@ if (
 
 
 // For image uploads, use strict occasion resolver (no generic social fallback)
-const imageOccasion = isImageUpload ? (resolveOccasionFromImage(userQuery) || priorIntent || null) : null;
+const explicitOccasion = isImageUpload ? (resolveOccasionFromImage(userQuery) || priorIntent || null) : null;
+const imageOccasion = explicitOccasion;
 
 // IMAGE UPLOAD: no clear occasion → ask clarifying question before calling OpenAI
 if (isImageUpload && !imageOccasion) {
@@ -307,6 +313,11 @@ if (isImageUpload && !imageOccasion) {
 
 // IMAGE UPLOAD: occasion known → outfit feedback via vision
 if (isImageUpload && imageOccasion) {
+  // Did user explicitly state an occasion, or did we infer "social" from a generic feedback phrase?
+  const occasionWasExplicit = Boolean(
+    resolveIntentFromText(userQuery) || priorIntent
+  );
+
   const outfitFeedbackSystem = [
     personaSystem.trim(),
     "",
@@ -318,6 +329,9 @@ if (isImageUpload && imageOccasion) {
     "- Be specific — reference actual elements from the image.",
     "- Do NOT comment on nails. Do not suggest a belt.",
     "- Never mention brands or budget.",
+    occasionWasExplicit
+      ? "- next_questions: one short forward-moving question. Omit if approved and context is clear."
+      : "- next_questions: ALWAYS include one question asking what they're planning to wear this for, and suggest one specific occasion it would work well for (e.g. 'What are you thinking of wearing this for? This would be great for a weekday dinner with friends.').",
     "Return VALID JSON only. No markdown.",
     "",
     `OUTPUT CONTRACT:
@@ -328,7 +342,7 @@ if (isImageUpload && imageOccasion) {
   "sections": [
     { "key": "verdict", "content": ["Love this." or "I'd go with something else.", "One sentence reason."] },
     { "key": "style_notes", "content": ["Max 2 items. If approved: what works + one elevating detail. If not: 2 specific alternative outfit ideas."] },
-    { "key": "next_questions", "content": ["One short forward-moving question. Omit if the outfit was approved and context is clear."] }
+    { "key": "next_questions", "content": ["Forward-moving question."] }
   ]
 }`,
   ].join("\n");
@@ -343,7 +357,10 @@ if (isImageUpload && imageOccasion) {
       role: "user",
       content: [
         { type: "text", text: userQuery || "What do you think of this outfit?" },
-        { type: "image_url", image_url: { url: `data:image/jpeg;base64,${imageBase64}`, detail: "low" } },
+        ...imagesBase64.map((b64) => ({
+          type: "image_url",
+          image_url: { url: `data:image/jpeg;base64,${b64}`, detail: "low" },
+        })),
       ],
     },
   ];
@@ -368,7 +385,8 @@ if (isImageUpload && imageOccasion) {
         const parsed = safeParseJson(raw);
         if (!parsed.ok) { send({ type: "error", detail: parsed.error }); controller.close(); return; }
         try {
-          assertValidLlmResponse(parsed.value, { responseType: "outfit_feedback", intent: imageOccasion! });
+          assertValidLlmResponse(parsed.value, { responseType: "outfit_feedback", intent: imageOccasion });
+
         } catch (e: any) {
           send({ type: "error", detail: e?.message }); controller.close(); return;
         }
