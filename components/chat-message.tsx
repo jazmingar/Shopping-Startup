@@ -165,7 +165,7 @@ function StructuredResponse({
             <React.Fragment key={idx}>
               <div className="rounded-lg border-l-4 border-accent bg-accent/5 p-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-accent mb-1.5">Editor's Note</p>
-                <div className="space-y-1 text-sm italic text-accent">
+                <div className="space-y-1 text-sm italic text-foreground">
                   {section.content.map((note, noteIdx) => (
                     <p key={noteIdx}>{note}</p>
                   ))}
