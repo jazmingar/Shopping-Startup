@@ -154,16 +154,21 @@ export default function Home() {
   // Stores an uploaded image when the LLM asks a clarifying question — re-sent on next turn
   const pendingImageRef = React.useRef<File | null>(null);
 
-  // Weather — fetched once on load via browser geolocation, cached in localStorage for 24h
+  // Weather — fetched once via browser geolocation, cached for 7 days.
+  // If user denies permission, we store that and never ask again.
   const [weather, setWeather] = React.useState<string | undefined>(undefined);
   const weatherLocationRef = React.useRef<string | null>(null);
 
   React.useEffect(() => {
-    // Check cache first — avoid re-prompting for location on every session
+    const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
     try {
+      // Never re-prompt if user previously denied
+      if (localStorage.getItem("drape_weather_denied") === "1") return;
+
+      // Use cached weather if still fresh
       const cached = localStorage.getItem("drape_weather");
       const cachedAt = Number(localStorage.getItem("drape_weather_at") || "0");
-      if (cached && Date.now() - cachedAt < 24 * 60 * 60 * 1000) {
+      if (cached && Date.now() - cachedAt < SEVEN_DAYS) {
         setWeather(cached);
         weatherLocationRef.current = "geolocation";
         return;
@@ -183,7 +188,10 @@ export default function Home() {
           } catch {}
         }
       },
-      () => {} // silently ignore — permission denied or unavailable
+      () => {
+        // User denied — remember this so we never prompt again
+        try { localStorage.setItem("drape_weather_denied", "1"); } catch {}
+      }
     );
   }, []);
 
