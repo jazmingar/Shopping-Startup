@@ -75,6 +75,19 @@ function resolveOccasionFromImage(userText: string): Intent | null {
   if (t.includes("date") || t.includes("date night") || t.includes("hinge") || t.includes("bumble")) return "date";
   if (t.includes("fall") || t.includes("winter") || t.includes("spring") || t.includes("summer") || t.includes("season")) return "seasonality";
   if (t.includes("night out") || t.includes("going out") || t.includes("club") || t.includes("concert") || t.includes("party") || t.includes("dinner") || t.includes("brunch") || t.includes("event") || t.includes("baby shower") || t.includes("birthday") || t.includes("girls night") || t.includes("rooftop") || t.includes("bbq") || t.includes("cookout") || t.includes("gala")) return "social";
+
+  // General feedback request — user wants an opinion on a piece/outfit, not occasion-specific styling.
+  // Skip the clarifying question and give direct feedback.
+  if (
+    t.includes("what do you think") || t.includes("what do u think") ||
+    t.includes("thoughts on") || t.includes("do you like") ||
+    t.includes("feedback") || t.includes("opinion") ||
+    t.includes("how does this") || t.includes("how do i look") ||
+    t.includes("does this work") || t.includes("is this") ||
+    t.includes("rate this") || t.includes("honest opinion") ||
+    t.includes("cute") || t.includes("would you wear")
+  ) return "social";
+
   return null;
 }
 
