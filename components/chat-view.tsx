@@ -13,6 +13,7 @@ interface ChatViewProps {
   messages: Message[];
   onSendMessage: (message: string, images?: File[]) => void;
   onStarterSelect: (prompt: string) => void;
+  onPhotoFeedback: (files: File[]) => void;
   isPinned: boolean;
   onTogglePin: () => void;
   isLoading?: boolean;
@@ -65,6 +66,7 @@ export function ChatView({
   messages,
   onSendMessage,
   onStarterSelect,
+  onPhotoFeedback,
   isPinned,
   onTogglePin,
   isLoading = false,
@@ -143,7 +145,7 @@ export function ChatView({
                 placeholder="What are we dressing for?"
               />
               <div className="mt-6">
-                <StarterChips onSelect={onStarterSelect} />
+                <StarterChips onSelect={onStarterSelect} onPhotoFeedback={onPhotoFeedback} />
               </div>
             </div>
           </div>

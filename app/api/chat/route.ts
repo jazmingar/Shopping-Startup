@@ -318,23 +318,58 @@ if (isImageUpload && imageOccasion) {
     resolveIntentFromText(userQuery) || priorIntent
   );
 
-  const outfitFeedbackSystem = [
-    personaSystem.trim(),
-    "",
-    "IMAGE ANALYSIS MODE — fast, direct, momentum-friendly. The user may be cycling through multiple outfits. Keep responses short.",
-    "",
-    "FEEDBACK RULES:",
-    "- Approved: verdict[0] = 'Love this.' Verdict[1] = 1-2 sentences on why it works. Style notes: 1-2 specific observations max.",
-    "- Not approved: verdict[0] = 'I\\'d go with something else.' Verdict[1] = one sentence on the specific issue (fit, occasion, proportion, color). Style notes: exactly 2 alternative outfit recommendations — specific pieces, not general advice.",
-    "- Be specific — reference actual elements from the image.",
-    "- Do NOT comment on nails. Do not suggest a belt.",
-    "- Never mention brands or budget.",
-    occasionWasExplicit
-      ? "- next_questions: one short forward-moving question. Omit if approved and context is clear."
-      : "- next_questions: ALWAYS include one question asking what they're planning to wear this for, and suggest one specific occasion it would work well for (e.g. 'What are you thinking of wearing this for? This would be great for a weekday dinner with friends.').",
-    "Return VALID JSON only. No markdown.",
-    "",
-    `OUTPUT CONTRACT:
+  const isMultiPhoto = imagesBase64.length > 1;
+
+  const outfitFeedbackSystem = isMultiPhoto
+    ? [
+        personaSystem.trim(),
+        "",
+        "IMAGE ANALYSIS MODE — the user uploaded multiple outfit photos. Give individual feedback on each photo separately. Be specific to what you see in each one.",
+        "",
+        "FEEDBACK RULES (per photo):",
+        "- Approved: verdict = 'Love this.' + 1-2 sentences on why it works. Notes: 1-2 specific observations.",
+        "- Not approved: verdict = 'I\\'d go with something else.' + one sentence on the specific issue. Notes: 2 specific alternative outfit ideas.",
+        "- Be specific — reference actual elements visible in each photo.",
+        "- Do NOT comment on nails. Do not suggest a belt. Never mention brands or budget.",
+        occasionWasExplicit
+          ? "- next_questions: one forward-moving question across all looks."
+          : "- next_questions: ask what occasion(s) they're thinking of and suggest one that fits.",
+        "Return VALID JSON only. No markdown.",
+        "",
+        `OUTPUT CONTRACT:
+{
+  "responseType": "outfit_feedback",
+  "intent": "${imageOccasion}",
+  "title": "Outfit Read",
+  "sections": [
+    {
+      "key": "photo_feedback",
+      "photos": [
+        { "slot": 1, "verdict": "Love this." or "I'd go with something else.", "reason": "One sentence.", "notes": ["Up to 2 items."] },
+        { "slot": 2, "verdict": "...", "reason": "...", "notes": ["..."] }
+      ]
+    },
+    { "key": "next_questions", "content": ["One forward-moving question."] }
+  ]
+}`,
+      ].join("\n")
+    : [
+        personaSystem.trim(),
+        "",
+        "IMAGE ANALYSIS MODE — fast, direct, momentum-friendly. The user may be cycling through multiple outfits. Keep responses short.",
+        "",
+        "FEEDBACK RULES:",
+        "- Approved: verdict[0] = 'Love this.' Verdict[1] = 1-2 sentences on why it works. Style notes: 1-2 specific observations max.",
+        "- Not approved: verdict[0] = 'I\\'d go with something else.' Verdict[1] = one sentence on the specific issue (fit, occasion, proportion, color). Style notes: exactly 2 alternative outfit recommendations — specific pieces, not general advice.",
+        "- Be specific — reference actual elements from the image.",
+        "- Do NOT comment on nails. Do not suggest a belt.",
+        "- Never mention brands or budget.",
+        occasionWasExplicit
+          ? "- next_questions: one short forward-moving question. Omit if approved and context is clear."
+          : "- next_questions: ALWAYS include one question asking what they're planning to wear this for, and suggest one specific occasion it would work well for (e.g. 'What are you thinking of wearing this for? This would be great for a weekday dinner with friends.').",
+        "Return VALID JSON only. No markdown.",
+        "",
+        `OUTPUT CONTRACT:
 {
   "responseType": "outfit_feedback",
   "intent": "${imageOccasion}",
@@ -345,7 +380,7 @@ if (isImageUpload && imageOccasion) {
     { "key": "next_questions", "content": ["Forward-moving question."] }
   ]
 }`,
-  ].join("\n");
+      ].join("\n");
 
   const convHistory = Array.isArray(payload?.conversationHistory) ? payload.conversationHistory : [];
   const visionMessages: any[] = [

@@ -198,6 +198,37 @@ function StructuredResponse({
           );
         }
 
+        if (section.key === "photo_feedback" && "photos" in section) {
+          return (
+            <React.Fragment key={idx}>
+              <div className="space-y-6">
+                {(section as any).photos.map((photo: any, photoIdx: number) => {
+                  const approved = photo.verdict === "Love this.";
+                  return (
+                    <div key={photoIdx} className="space-y-2">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                        Photo {photo.slot}
+                      </p>
+                      <p className="font-semibold text-foreground">{photo.verdict}</p>
+                      {photo.reason && (
+                        <p className="text-sm leading-relaxed text-muted-foreground">{photo.reason}</p>
+                      )}
+                      {photo.notes?.length > 0 && (
+                        <ul className="space-y-1 text-sm text-foreground">
+                          {photo.notes.map((note: string, noteIdx: number) => (
+                            <li key={noteIdx}>• {note}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <hr className="border-border" />
+            </React.Fragment>
+          );
+        }
+
         if (section.key === "next_questions" && "content" in section && section.content.length > 0) {
           return (
             <div key={idx} className="space-y-2">

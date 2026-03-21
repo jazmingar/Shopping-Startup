@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { Sparkles, Briefcase, ShoppingBag } from "lucide-react";
+import { Sparkles, Briefcase, ShoppingBag, Camera } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface StarterChip {
@@ -14,6 +14,7 @@ interface StarterChip {
 
 interface StarterChipsProps {
   onSelect: (prompt: string) => void;
+  onPhotoFeedback: (files: File[]) => void;
 }
 
 const chips: StarterChip[] = [
@@ -37,7 +38,15 @@ const chips: StarterChip[] = [
   },
 ];
 
-export function StarterChips({ onSelect }: StarterChipsProps) {
+export function StarterChips({ onSelect, onPhotoFeedback }: StarterChipsProps) {
+  const photoInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length > 0) onPhotoFeedback(files);
+    if (photoInputRef.current) photoInputRef.current.value = "";
+  };
+
   return (
     <div className="flex flex-wrap justify-center gap-2">
       {chips.map((chip) => (
@@ -56,6 +65,29 @@ export function StarterChips({ onSelect }: StarterChipsProps) {
           {chip.label}
         </button>
       ))}
+
+      {/* Camera chip — opens file picker directly */}
+      <input
+        ref={photoInputRef}
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={handlePhotoChange}
+      />
+      <button
+        onClick={() => photoInputRef.current?.click()}
+        className={cn(
+          "group flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2.5",
+          "text-sm text-muted-foreground transition-all duration-200",
+          "hover:border-muted-foreground/50 hover:bg-secondary hover:text-foreground"
+        )}
+      >
+        <span className="text-muted-foreground group-hover:text-accent">
+          <Camera className="h-4 w-4" />
+        </span>
+        Rate my outfit
+      </button>
     </div>
   );
 }

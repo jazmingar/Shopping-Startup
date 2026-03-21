@@ -10,7 +10,8 @@ export type SectionKey =
   | "editors_note"
   | "next_questions"
   | "wardrobe_items"
-  | "verdict";
+  | "verdict"
+  | "photo_feedback";
 
 export type IntentSection = {
   key: SectionKey;
@@ -160,11 +161,23 @@ export type WardrobeGapResponse = {
   sections: (TextSection | WardrobeItemsSection)[];
 };
 
+export type PhotoFeedback = {
+  slot: number;
+  verdict: "Love this." | "I'd go with something else.";
+  reason: string;
+  notes: string[];
+};
+
+export type PhotoFeedbackSection = {
+  key: "photo_feedback";
+  photos: PhotoFeedback[];
+};
+
 export type OutfitFeedbackResponse = {
   responseType: "outfit_feedback";
   intent: Intent;
   title: string;
-  sections: TextSection[];
+  sections: (TextSection | PhotoFeedbackSection)[];
 };
 
 export type LlmResponse = InitialResponse | FollowupResponse | ClarifyingResponse | WardrobeGapResponse | OutfitFeedbackResponse;

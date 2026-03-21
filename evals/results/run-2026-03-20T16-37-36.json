@@ -1,0 +1,1924 @@
+[
+  {
+    "id": "tc_001",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "First date tonight, dinner in SoHo. What's the move?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 37338,
+    "responseType": "initial",
+    "responseSummary": "First Date in SoHo",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "First Date in SoHo",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a first date in SoHo, let's aim for confidence-forward looks that blend sophistication with a touch of edge. We want something that feels elevated yet approachable."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Edgy Leather Mix",
+              "description": "Pair a sleek black leather mini skirt with a black mockneck bodysuit. Add knee-high black boots and a structured leather jacket for a look that feels edgy yet polished.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Effortless Denim",
+              "description": "Opt for dark wash jeans with a black off-shoulder long sleeve top. Style it with black booties and a small crossbody bag for an effortlessly chic ensemble.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Classic Maxi",
+              "description": "Choose a black knit long sleeve maxi dress. Pair it with ankle boots and a sleek clutch to keep the look timeless yet modern.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "classic",
+                "colorStory": "monochromatic"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it offers a perfect blend of edgy style and polished sophistication, ideal for a first date in the city."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What's the vibe of the restaurant—more casual or upscale?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-leather-pants.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "tc_002",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Second date, I want to level it up a bit from last time. Casual bar in the West Village.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 7499,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For your second date at a casual bar in the West Village, let's elevate your look with confidence-forward silhouettes and intentional styling. We'll keep it chic, yet effortless."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Edgy Knit",
+              "description": "A sleek black knit dress with an asymmetrical hemline, offering a modern twist. Pair it with knee-high boots and a minimalist crossbody bag for a look that's both stylish and comfortable.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Leather & Sheer",
+              "description": "A leather mini skirt paired with a sheer black blouse, creating a striking contrast. Complete the look with pointed-toe ankle boots and a sleek clutch for an effortlessly cool vibe.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Casual Glam",
+              "description": "Dark wash jeans with a black off-shoulder top, styled with statement earrings and polished loafers. Perfect for a laid-back yet put-together appearance.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it perfectly balances modern edge and comfort, making it ideal for a casual yet stylish evening."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What is the vibe you're aiming for on this second date—more relaxed or slightly dressier?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-leather-pants.jpg",
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_003",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Date at an art gallery opening, I want to look interesting not just pretty.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 16218,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For an art gallery opening date, we want to capture a look that's both intriguing and stylish. Think bold silhouettes and a palette that lets your personality shine."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Artistic Edge",
+              "description": "A black leather pencil skirt paired with a sheer black top, layered with a structured blazer. Finish with knee-high boots for a look that's both bold and sophisticated.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Modern Muse",
+              "description": "A sleek black midi dress with an asymmetrical neckline, styled with ankle-strap block heels and a small clutch. This outfit is all about clean lines and sophisticated allure.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Gallery Glam",
+              "description": "A tailored burgundy suit with a black turtleneck underneath, paired with pointed-toe loafers. Add a statement necklace to elevate the look with a touch of glamour.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "suit",
+                "aesthetic": "classic",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it perfectly combines edge and sophistication, making it ideal for standing out at an art gallery opening."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Is there a particular piece you love or want to explore more?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-slip-dress.jpg",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "tc_004",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Hinge date, coffee then probably a walk. Effortless but put together.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 24620,
+    "responseType": "initial",
+    "responseSummary": "Coffee Date Style",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "Coffee Date Style",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a coffee date with a walk, we're going for an effortlessly chic vibe that balances comfort with a touch of polish. Let's create a look that feels put together yet relaxed."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Cozy Chic",
+              "description": "A pair of high-waisted dark wash jeans with a cream cable knit sweater. Add a camel trench coat for warmth and finish with sleek white sneakers for an effortless look that's ready for a stroll.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Effortless Edge",
+              "description": "Black straight-leg jeans paired with a black mockneck top and a leather jacket. Complete the look with black loafers and a small crossbody bag for a chic, urban vibe.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Soft Touch",
+              "description": "A pair of mid-rise jeans with a soft blush knit sweater. Layer with a light gray wool coat and finish with classic loafers for a look that feels fresh and approachable.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "romantic",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 2 is my top pick—it's the perfect blend of urban edge and comfort, making it ideal for a city date."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Do you prefer a more casual or slightly edgy look for your coffee date?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-slip-dress.jpg",
+        "/lookbook/v1/date-leather-pants.jpg",
+        "/lookbook/v1/date-maxi-dress.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_005",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Anniversary dinner somewhere fancy. I want to look stunning but not like I tried too hard.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 11082,
+    "responseType": "initial",
+    "responseSummary": "Anniversary Dinner Style",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "social",
+      "title": "Anniversary Dinner Style",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For your anniversary dinner, we want to capture a look that's effortlessly stunning with a touch of elegance. Think modern silhouettes with a luxurious feel—perfect for a special evening."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Velvet Maxi",
+              "description": "A deep navy velvet maxi dress with a subtle side slit. Pair it with silver drop earrings and metallic strappy heels for a hint of glamour.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "romantic",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Sheer Elegance",
+              "description": "A black silk blouse with delicate sheer detailing tucked into a high-waisted satin skirt in ivory. Complete the look with pointed-toe heels and a sleek clutch for a sophisticated finish.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Luxe Knit",
+              "description": "A cream knit dress with a fitted silhouette that hugs the body gracefully. Style it with nude heels and minimalist gold jewelry for an understated yet chic ensemble.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 2 is my top pick—it strikes the perfect balance between modern edge and timeless sophistication, making it perfect for a memorable anniversary dinner."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "How do you feel about incorporating different textures like silk or velvet into your look?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/mint-lace-slip-dress.jpg",
+        "/lookbook/v1/date-asymmetric-top-flare-jeans.jpg",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "tc_006",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Date in an hour. What do I wear?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 27833,
+    "responseType": "initial",
+    "responseSummary": "Date Night in a Flash",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "Date Night in a Flash",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a quick date night look, we're zeroing in on silhouettes that exude confidence and ease. Let's create an ensemble that's both elevated and feels like second nature."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Chic Contrast",
+              "description": "Slip into a black off-shoulder long sleeve top paired with tailored dark jeans and sleek ankle boots. Add a touch of glamour with a structured small clutch and gold hoops.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Effortless Edge",
+              "description": "Opt for a leather mini skirt with a fitted black mockneck bodysuit. Complete the look with knee-high black boots and a minimalist crossbody bag for a polished finish.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Subtle Statement",
+              "description": "Choose a long sleeve knit dress in a soft charcoal. Pair with low-heeled booties and a delicate silver necklace to keep it understated yet sophisticated.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it effortlessly blends comfort and style with an edgy touch, perfect for a quick yet impactful date night ensemble."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "If the location changes or if there's more walking involved, let me know so we can adjust the shoes for comfort."
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-leather-skirt-knee-highs.jpg",
+        "/lookbook/v1/date-slip-dress.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_007",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Jazz bar date, sophisticated but not stuffy. Give me a look.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 27986,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a jazz bar date, we want to blend sophistication with a touch of cool. The aim is to look polished without feeling overly formal."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Leather Edge",
+              "description": "Pair a black leather mini skirt with a sheer long-sleeve black top. Add knee-high black boots and a small clutch to keep it sleek. The monochrome look feels both edgy and sophisticated, perfect for a jazz bar setting.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Chic Ensemble",
+              "description": "Opt for dark wash jeans paired with a black off-shoulder top. Finish with ankle boots and a statement necklace for a touch of glam. This look is casually elevated, ideal for a night of music and conversation.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Modern Classic",
+              "description": "Choose a black knit dress with long sleeves, styled with knee-high boots. Layer with a fitted leather jacket to add a modern twist. This look is effortlessly chic and perfect for keeping warm on a cool night.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "classic",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it's the right mix of cool and sophistication, making it perfect for the jazz bar vibe."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Is there anything specific you want to highlight or downplay in your look tonight?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "tc_008",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Beach date in Miami. Cute but functional.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 23081,
+    "responseType": "initial",
+    "responseSummary": "Beach Date in Miami",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "Beach Date in Miami",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a beach date in Miami, let's focus on effortless, cool silhouettes that are both flattering and comfortable. We want you to feel breezy yet put-together."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Easy Breezy Maxi",
+              "description": "An airy white maxi dress with soft, flowing layers. Pair it with strappy flat sandals and a woven tote to keep it chic yet relaxed. A wide-brimmed hat adds a touch of glamour while protecting you from the sun.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "bohemian",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Playful Set",
+              "description": "A two-piece set with a cropped top and high-waisted skirt in a light, breathable fabric. Opt for a pastel or soft floral print to keep it playful. Pair with espadrille flats and a small crossbody bag for a touch of structure.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "set",
+                "aesthetic": "romantic",
+                "colorStory": "mixed"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Effortless Sundress",
+              "description": "A lightweight sundress in a soft lemon hue. Style it with simple white sneakers for a stroll-friendly look, and add a crossbody bag. A pair of oversized sunglasses completes this effortlessly chic outfit.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "minimal",
+                "colorStory": "bold-color"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it's effortlessly chic and perfectly captures the Miami beach vibe while ensuring comfort and style."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What time of day is the date happening, and are there any specific activities planned?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-slip-dress.jpg",
+        "/lookbook/v1/date-brown-ruffle-flare-jeans.jpg",
+        "/lookbook/v1/mint-lace-slip-dress.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_009",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Rooftop bar date. I want to look like I own the place.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 10920,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a rooftop bar date, let's channel a vibe that's both confident and chic. We're going for standout pieces that make you feel like you own the room."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Leather Luxe",
+              "description": "A black leather mini skirt paired with a sheer black off-shoulder top. Finish the look with knee-high black boots and a sleek clutch. The monochrome palette keeps it modern and striking.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Elegant Allure",
+              "description": "Opt for a black slip dress with a subtle sheen, styled with minimalist gold jewelry and ankle-strap heels. Add a tailored long coat to elevate the look for cooler temperatures.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Chic Ensemble",
+              "description": "Combine a white blouse with a high-waisted black leather pencil skirt. Add a pair of closed-toe pumps and a structured handbag. This look is polished and perfect for making an impression.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "classic",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it combines edgy elements with a polished finish, ensuring you stand out effortlessly."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What's the forecast for the evening, and do you want a touch of color or stick with neutrals?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-slip-dress.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_010",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Date night with my boyfriend, nice restaurant. We've been together two years so I still want to make an effort.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 5382,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For your two-year anniversary dinner, let's focus on a look that's both chic and comfortable. We want something that feels special but not overdone, with an emphasis on flattering silhouettes and intentional details."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Effortless Elegance",
+              "description": "A black mockneck bodysuit paired with a sleek leather pencil skirt. Add knee-high boots and a minimalist clutch for a polished look that's perfect for a nice dinner setting.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Modern Classic",
+              "description": "A long-sleeve knit dress in a deep charcoal shade, paired with pointed-toe black pumps. Accessorize with delicate silver jewelry to keep it timeless yet modern.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "classic",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Chic Minimalist",
+              "description": "A tailored black blazer over a creamy silk camisole and wide-leg trousers. Finish with ankle-strap heels and a structured handbag for an elevated, minimalist vibe.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it combines effortless elegance with a touch of edge, perfect for a special dinner while feeling comfortable and confident."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Do you need any specific styling tips or advice on accessories to complete the look you've selected?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-asymmetric-top-flare-jeans.jpg",
+        "",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_011",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I have a first date and I honestly have no idea what to wear. It's dinner.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 12789,
+    "responseType": "initial",
+    "responseSummary": "First Date Dinner",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "First Date Dinner",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a first date dinner, let's focus on flattering silhouettes and a confident vibe that feels effortless yet elevated. We want you to feel like the best version of yourself."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Effortless Chic",
+              "description": "A black mini skirt paired with a black off-shoulder long sleeve top, styled with knee-high black boots. Add a touch of sparkle with delicate earrings. The monochrome palette ensures a modern and elevated look.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Confident Edge",
+              "description": "A sleek leather maxi skirt paired with a sheer black top, complemented by knee-high black boots. This look is all about subtle allure with a touch of edge, perfect for making a memorable first impression.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Elegant Drape",
+              "description": "A soft, draped long-sleeve knit dress in a warm taupe, styled with ankle-strap heels and understated jewelry. This choice offers comfort with a hint of sophistication, ideal for a cozy yet refined dinner setting.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "romantic",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 2 is my top pick—it combines modern edge with a touch of sophistication, making it perfect for a standout first date impression."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Is there a specific vibe or dress code for the restaurant you're heading to?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-asymmetric-top-flare-jeans.jpg",
+        "/lookbook/v1/date-maxi-dress.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_012",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "Going on a date to a nice restaurant. I never know how dressed up to get.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 23744,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a dinner date at a nice restaurant, we're focusing on polished, elevated looks that feel effortless yet intentional. The goal is a confident vibe with chic details."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Sleek Monochrome",
+              "description": "Opt for a black high-neck blouse tucked into a black leather pencil skirt. Pair with pointed-toe pumps and a sleek clutch to keep the look refined and sophisticated.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Chic Ensemble",
+              "description": "A tailored black blazer worn over a fitted white top and high-waisted black trousers. Add ankle-strap heels and a minimalist black handbag for a touch of elegance.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Velvet Statement",
+              "description": "A deep burgundy velvet midi dress with long sleeves, complemented by knee-high boots and a small chain bag. This look is both warm and stylish, ideal for a winter evening.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "romantic",
+                "colorStory": "bold-color"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 2 is my top pick—it's the perfect blend of polished and minimalist, making it versatile for a refined dinner setting."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Are there any specific details or preferences you want to focus on for this date outfit?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg",
+        "/lookbook/v1/mint-lace-slip-dress.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_013",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "My boyfriend is taking me somewhere nice for our anniversary. I want to look good but I don't really have a style.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 14623,
+    "responseType": "initial",
+    "responseSummary": "The Social Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "social",
+      "title": "The Social Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For your anniversary dinner, let's aim for looks that are confident and sophisticated with a touch of playful elegance. We want a memorable outfit that feels both special and distinctly you."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Chic Leather Duo",
+              "description": "A black leather mini skirt paired with an off-shoulder black sheer top. Complete the look with knee-high boots and a sleek clutch. This ensemble is bold yet refined, perfect for an intimate dinner.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Elegant Maxi",
+              "description": "A flowing cream maxi dress with a subtle wrap detail. Pair it with nude heels and delicate gold jewelry to keep the look soft and understated yet striking.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "romantic",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Effortless Classic",
+              "description": "A black long-sleeve knit dress that hugs the body in all the right places. Add a pair of ankle boots and a statement ring for that understated elegance.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it combines a modern edge with a classic silhouette, creating a look that's both daring and effortlessly chic."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Are there any specific colors or styles you typically love or want to avoid?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/mint-lace-slip-dress.jpg",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "tc_014",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "First date in a long time and I feel really out of practice. I don't want to look like I tried too hard but I also want to make an effort.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 11271,
+    "responseType": "initial",
+    "responseSummary": "First Date Reimagined",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "First Date Reimagined",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a first date, let's focus on flattering silhouettes and a chic palette that feels intentional. We want you to look effortlessly put together, with a touch of modern flair."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Effortless Knit",
+              "description": "A black ribbed knit mini dress with long sleeves for a cozy yet refined look. Pair it with knee-high black boots and delicate gold jewelry to keep it simple yet impactful.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Leather Statement",
+              "description": "A black leather mini skirt teamed with a sheer black mock-neck top. Add knee-high boots and a sleek black coat for a modern and edgy vibe.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Elevated Denim",
+              "description": "High-waisted dark wash jeans paired with a black off-shoulder top. Finish the look with pointed-toe black booties and a simple clutch for an effortlessly cool appearance.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 2 is my top pick—it captures a perfect mix of modern edge and confidence, ideal for making a memorable impression."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "string"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-slip-dress.jpg",
+        "/lookbook/v1/date-leather-pants.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_015",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I have a date tomorrow and when I look in my closet everything feels wrong. Help.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 5736,
+    "responseType": "clarifying",
+    "responseSummary": "",
+    "responseText": "[Clarifying question] ",
+    "rawResponse": {
+      "responseType": "clarifying",
+      "intent": "date",
+      "title": "Quick question",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "Let's get you feeling fabulous for your date!"
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Is this more of a casual spot or a nicer restaurant — and is this a first date or are you already seeing each other?"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tc_016",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "How do I dress for a first date without looking overdressed or underdressed? I can never find the middle ground.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 9896,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a first date, we are targeting effortless confidence with chic silhouettes and an intentional color palette. The goal is to strike that perfect balance between looking put-together and feeling comfortable."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Effortless Chic",
+              "description": "A sleek black mockneck bodysuit paired with high-waisted dark wash jeans and a tailored wool coat. Finish the look with ankle booties and a delicate silver necklace for a dash of elegance.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Modern Edge",
+              "description": "A leather mini skirt with a sheer black long-sleeve top. Add knee-high boots and a structured crossbody bag for an outfit that's both sharp and intriguing.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Streamlined Classic",
+              "description": "A black knit dress with a subtle slit, styled with pointed toe loafers and a minimalist clutch. This look is about clean lines and comfort while maintaining a chic silhouette.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 2 is my top pick—it perfectly combines modern edge with timeless sophistication, making it ideal for a first date where you want to impress effortlessly."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What kind of venue are you heading to—more casual or a nicer restaurant?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-leather-pants.jpg",
+        "/lookbook/v1/date-asymmetric-top-flare-jeans.jpg",
+        "/lookbook/v1/date-slip-dress.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_017",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "Going on a date to a rooftop bar. I don't really go out much so I'm not sure what's appropriate.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 16842,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a rooftop date, let's aim for chic, effortless looks that capture the night sky vibe. We're focusing on outfits that feel elevated yet comfortable for that open-air setting."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Urban Chic",
+              "description": "A black leather mini skirt paired with a fitted off-shoulder long sleeve top. Complete the look with knee-high boots and a sleek clutch. The monochrome palette ensures a modern, city-ready feel.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Effortless Maxi",
+              "description": "A short sleeve printed maxi dress with a subtle leopard print, perfect for catching the evening breeze. Pair it with ankle strap flats and a small crossbody bag for an easy-going yet stylish look.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "bohemian",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Night Out Glam",
+              "description": "High-waisted dark wash jeans with a black, sheer lace top. Add pointed-toe heels and a structured mini bag for a look that is both comfortable and striking.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it perfectly balances urban edge with a sleek silhouette, making it ideal for a rooftop setting."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "If you're uncertain about the dress code, is it more on the casual side or does it lean towards a dressier vibe?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-slip-dress.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_018",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I always feel self-conscious on dates. I want to wear something that makes me feel confident but I don't know where to start.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 7256,
+    "responseType": "clarifying",
+    "responseSummary": "",
+    "responseText": "[Clarifying question] ",
+    "rawResponse": {
+      "responseType": "clarifying",
+      "intent": "date",
+      "title": "Quick question",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "Let's make sure we set you up with the perfect look."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Is this more of a casual spot or a nicer restaurant — and is this a first date or are you already seeing each other?"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tc_019",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "Coffee date, I don't want to look like I over-thought it but I also want to look nice. What do I actually wear?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 25012,
+    "responseType": "initial",
+    "responseSummary": "The Date Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "date",
+      "title": "The Date Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a coffee date, we want to nail that effortless yet polished vibe. We're going for comfortable chic with just the right amount of flair."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Effortless Cool",
+              "description": "Opt for a pair of dark wash jeans paired with a cozy yet stylish black sweater. Layer with a camel trench coat for an added hint of sophistication, and finish the look with sleek ankle boots. This ensemble is all about feeling comfortable while looking put together.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Polished Edge",
+              "description": "Choose a black leather skirt teamed with a soft, slightly oversized cream sweater. Add black knee-high boots for a touch of edge, and throw on a sleek crossbody bag to keep it functional yet stylish.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Chic Comfort",
+              "description": "A pair of tailored black trousers with a simple white turtleneck creates a sleek silhouette. Add a structured blazer in a neutral tone to keep it sharp, and choose polished loafers for a comfortable finish.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it perfectly balances comfort and style, ensuring you look effortlessly chic without trying too hard."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Is this more of a casual spot or a nicer cafe, and is this a first date or are you already seeing each other?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-slip-dress.jpg",
+        "/lookbook/v1/date-asymmetric-top-flare-jeans.jpg",
+        "/lookbook/v1/date-all-black-leather-skirt.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_020",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I met someone and we're going to a jazz bar. I don't really know what that vibe is.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 31437,
+    "responseType": "initial",
+    "responseSummary": "Jazz Bar Vibes",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "travel",
+      "title": "Jazz Bar Vibes",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For an evening at a jazz bar, we're embracing a mix of understated elegance and a touch of allure. Think sophisticated with a hint of edge."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Black Sheath",
+              "description": "A sleek black sheath dress with a subtle shimmer, perfect for catching the dim lights of a jazz bar. Pair with a chic pair of ankle boots and a structured leather jacket for a bit of attitude.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Velvet Touch",
+              "description": "A tailored black velvet blazer layered over a simple silk camisole and high-waisted tapered trousers. Add statement earrings and heeled mules to complete the look.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "classic",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Luxe Knit",
+              "description": "A fitted knit top with a slight sheen paired with a flowing satin skirt. The contrast of textures adds depth, while strappy heels elevate the ensemble.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "romantic",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it's the perfect blend of edgy and chic, ensuring you stand out effortlessly in a jazz bar setting."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What time of year will you be going? This will help in recommending suitable layers if needed."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tc_021",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Girls night out in the Meatpacking District. Give me a look.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 18787,
+    "responseType": "initial",
+    "responseSummary": "The Social Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "social",
+      "title": "The Social Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a girls night out in the Meatpacking District, we're leaning into bold statements and sleek silhouettes. We want a look that catches the light and feels as vibrant as the city around you."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Leather Edge",
+              "description": "A black leather mini skirt paired with a sheer black off-shoulder top. Add knee-high boots and a sleek clutch to complete the look. It's edgy and perfect for the district's dynamic vibe.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Playful Print",
+              "description": "A short-sleeve leopard print maxi dress that flows with every step. Pair with black ankle-strap heels and a small crossbody bag for a touch of playful glamour.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "maximalist",
+                "colorStory": "mixed"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Relaxed Chic",
+              "description": "A black satin camisole tucked into wide-leg trousers, topped with a lightweight trench. Keep it comfortable yet chic with pointed toe flats and a structured tote.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it's bold and sophisticated, capturing the essence of a vibrant night out in the city."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What type of shoes do you feel most comfortable dancing in?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_022",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Friend's birthday dinner at a cool restaurant. Not a club but elevated.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 12760,
+    "responseType": "initial",
+    "responseSummary": "The Social Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "social",
+      "title": "The Social Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For your friend's birthday dinner at a chic restaurant, we want a look that feels confident and elevated, with a touch of playful sophistication."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Velvet Mini",
+              "description": "A sleek black velvet mini skirt paired with a long-sleeve sheer top. Add knee-high boots and a structured bag for a look that commands attention.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Satin Slip",
+              "description": "A deep navy satin slip dress that drapes beautifully. Pair it with strappy metallic heels and a petite clutch to add a hint of glamour.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "romantic",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Chic Ensemble",
+              "description": "A tailored wide-leg pant in black paired with a fitted ivory blouse. Finish the look with pointed toe heels and a statement necklace for a touch of elegance.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it combines a bold silhouette with a touch of edge, perfect for making a statement at a stylish dinner."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Do you have any specific color preferences or need help with shoes?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/mint-lace-slip-dress.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_023",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Rooftop party Saturday. I want to stand out.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 21717,
+    "responseType": "initial",
+    "responseSummary": "The Social Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "social",
+      "title": "The Social Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For a rooftop party on Saturday, we want looks that are bold yet wearable, with standout elements to ensure you make an impact."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Black Mini Drama",
+              "description": "A black leather mini skirt paired with an off-shoulder sheer top. Complete the look with knee-high boots and a sleek clutch. It's all about the edgy textures and the confident silhouette.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Glam Leopard Slip",
+              "description": "A leopard print slip dress that flows effortlessly, styled with gold hoop earrings and kitten heels. This look brings a playful energy while staying chic and eye-catching.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "maximalist",
+                "colorStory": "mixed"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Effortless Monochrome",
+              "description": "A white tailored blouse tucked into wide-leg black trousers, with pointed flats and a small structured bag. This is a chic and comfortable choice, perfect for dancing the night away.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it combines edgy textures and a confident silhouette that will make you stand out effortlessly."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "What kind of vibe are you aiming for—more glam or relaxed chic?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_024",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Concert tonight, EDM, standing venue. What's the move?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 7990,
+    "responseType": "initial",
+    "responseSummary": "The Social Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "social",
+      "title": "The Social Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For an EDM concert at a standing venue, we want a look that's both striking and comfortable. Let's focus on edgy textures and a streamlined silhouette that can keep up with the energy of the night."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Leather Chic",
+              "description": "A black leather mini skirt paired with a sheer black long-sleeve top. Add knee-high boots and a small crossbody bag for a sleek, concert-ready vibe.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "monochromatic"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Vibrant Contrast",
+              "description": "Black leather pants with a bold snakeskin print bodysuit. Finish with chunky ankle boots and a structured mini backpack to keep it fun and functional.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "maximalist",
+                "colorStory": "mixed"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Effortless Edge",
+              "description": "High-waisted black jeans and a cropped black tank top. Layer with an oversized denim jacket and finish with platform sneakers for a laid-back yet stylish look.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "coat-look",
+                "aesthetic": "minimal",
+                "colorStory": "neutral-tones"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 1 is my top pick—it perfectly balances edgy style with practical comfort, making it ideal for a high-energy concert environment."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "How do you feel about incorporating some statement accessories to enhance your look?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/date-all-black-leather-skirt.jpg",
+        "/lookbook/v1/date-asymmetric-top-flare-jeans.jpg",
+        "/lookbook/v1/date-jeans-bodysuit.jpg"
+      ]
+    }
+  },
+  {
+    "id": "tc_025",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Sunday brunch with the girls. Cute but I'm not trying to be formal.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "status": "ok",
+    "latencyMs": 26421,
+    "responseType": "initial",
+    "responseSummary": "The Social Edit",
+    "responseText": "[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined\n\n[undefined]\nundefined",
+    "rawResponse": {
+      "responseType": "initial",
+      "intent": "social",
+      "title": "The Social Edit",
+      "sections": [
+        {
+          "key": "intro",
+          "content": [
+            "For Sunday brunch with the girls, let's aim for a look that's playful yet relaxed. Think easy silhouettes with a touch of personality that fits the casual vibe."
+          ]
+        },
+        {
+          "key": "curated_looks",
+          "options": [
+            {
+              "slot": 1,
+              "title": "The Flowy Midi",
+              "description": "A breezy, floral midi dress in soft neutrals. Complement it with ankle-strap espadrilles and a woven crossbody bag for an effortless yet chic look.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "dress",
+                "aesthetic": "romantic",
+                "colorStory": "neutral-tones"
+              }
+            },
+            {
+              "slot": 2,
+              "title": "The Statement Skirt",
+              "description": "A high-waisted A-line skirt in a bold print paired with a fitted white tee. Add chunky white sneakers and simple gold hoops for a look that's fun and easy for brunch.",
+              "isEditorsPick": true,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "edgy",
+                "colorStory": "mixed"
+              }
+            },
+            {
+              "slot": 3,
+              "title": "The Casual Chic",
+              "description": "High-rise, straight-leg jeans with a tucked-in striped cotton shirt. Slip on some sleek loafers and carry a structured tote to balance comfort and style seamlessly.",
+              "isEditorsPick": false,
+              "imageHint": {
+                "clothingType": "top-bottom",
+                "aesthetic": "minimal",
+                "colorStory": "monochromatic"
+              }
+            }
+          ]
+        },
+        {
+          "key": "editors_note",
+          "content": [
+            "Look 2 is my top pick—it's playful yet practical, with a bold print that makes a statement without trying too hard. Perfect for a lively brunch setting."
+          ]
+        },
+        {
+          "key": "next_questions",
+          "content": [
+            "Is there a specific item or style you're hoping to incorporate into your brunch look?"
+          ]
+        }
+      ],
+      "inspirationImages": [
+        "/lookbook/v1/mint-lace-slip-dress.jpg",
+        "/lookbook/v1/date-asymmetric-top-flare-jeans.jpg",
+        "/lookbook/v1/date-all-black-leather-skirt.jpg"
+      ]
+    }
+  }
+]

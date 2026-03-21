@@ -542,6 +542,7 @@ export default function Home() {
             messages={messages}
             onSendMessage={handleSendMessage}
             onStarterSelect={handleStarterSelect}
+            onPhotoFeedback={(files) => handleSendMessage("What do you think of this outfit?", files)}
             isPinned={isPinned}
             onTogglePin={handleTogglePin}
             isLoading={isLoading}
