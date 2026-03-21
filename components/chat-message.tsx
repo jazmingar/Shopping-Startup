@@ -45,6 +45,12 @@ function StructuredResponse({
 }) {
   const isInitial = response.responseType === "initial";
 
+  const isRejection =
+    response.responseType === "outfit_feedback" &&
+    response.sections?.some(
+      (s) => s.key === "verdict" && "content" in s && s.content[0] === "I'd go with something else."
+    );
+
   if (!response.sections || !Array.isArray(response.sections)) {
     return null;
   }
@@ -131,10 +137,11 @@ function StructuredResponse({
         }
 
         if (section.key === "style_notes" && "content" in section) {
+          const styleNotesLabel = isRejection ? "What I'd wear instead" : "Style Notes";
           return (
             <React.Fragment key={idx}>
               <div className="space-y-2">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Style Notes</h3>
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{styleNotesLabel}</h3>
                 <ul className="space-y-1.5 text-sm text-foreground">
                   {section.content.map((note, noteIdx) => (
                     <li key={noteIdx}>• {note}</li>

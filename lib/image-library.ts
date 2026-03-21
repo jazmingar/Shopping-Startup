@@ -309,23 +309,25 @@ function scoreImage(
   hint: Partial<ImageHint>,
   location?: string | null
 ): number {
-  if (img.tags.occasion !== intent) return -1; // hard filter
+  // Hard filters — disqualify immediately if any provided hint doesn't match
+  if (img.tags.occasion !== intent) return -1;
+  if (hint.clothingType && img.tags.clothingType !== hint.clothingType) return -1;
+  if (hint.aesthetic && img.tags.aesthetic !== hint.aesthetic) return -1;
+  if (hint.colorStory && img.tags.colorStory !== hint.colorStory) return -1;
+
+  // Climate: only allow exact or one-step adjacent (e.g. cold↔mild OK, cold↔warm not)
+  const climateOrder: Climate[] = ["cold", "mild", "warm"];
+  const climateDiff = Math.abs(climateOrder.indexOf(img.tags.climate) - climateOrder.indexOf(climate));
+  if (climateDiff > 1) return -1;
 
   let score = 0;
 
   // Slot pin — highest priority
   if (targetSlot !== undefined && img.tags.slot === targetSlot) score += 5;
 
-  // Climate match
-  const climateOrder: Climate[] = ["cold", "mild", "warm"];
-  const diff = Math.abs(climateOrder.indexOf(img.tags.climate) - climateOrder.indexOf(climate));
-  if (diff === 0) score += 4;
-  else if (diff === 1) score += 1;
-
-  // LLM hint matching
-  if (hint.clothingType && img.tags.clothingType === hint.clothingType) score += 3;
-  if (hint.aesthetic && img.tags.aesthetic === hint.aesthetic) score += 2;
-  if (hint.colorStory && img.tags.colorStory === hint.colorStory) score += 2;
+  // Climate proximity bonus (exact > adjacent)
+  if (climateDiff === 0) score += 3;
+  else score += 1;
 
   // City style bonus
   if (location && img.tags.cityStyle) {
@@ -342,8 +344,9 @@ function scoreImage(
 
 /**
  * Find the best-matching image URL for a single slot.
- * Uses the LLM's imageHint for precise matching.
- * Returns an empty string if no match is found.
+ * clothingType, aesthetic, and colorStory are hard filters — if the hint
+ * specifies them, only images that match all three are eligible.
+ * Returns an empty string if no sufficiently matched image exists.
  */
 export function getImageForSlot(
   intent: Intent,
@@ -359,17 +362,11 @@ export function getImageForSlot(
       img,
       score: scoreImage(img, intent, slot, climate, hint ?? {}, location),
     }))
-    .filter(({ score }) => score >= 0)
+    .filter(({ score, img }) => score >= 0 && !excludeUrls.includes(img.url))
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
       return a.img.id.localeCompare(b.img.id);
     });
 
-  // Only return an image if it meets a minimum confidence threshold.
-  // Score 9 = climate (4) + clothingType (3) + aesthetic (2) — all three must align.
-  // Score 8 and below means aesthetic or clothingType didn't match — image won't look right.
-  const MIN_SCORE = 9;
-  const best = scored.find(({ score, img }) => score >= MIN_SCORE && !excludeUrls.includes(img.url));
-  if (!best) return "";
-  return best.img.url;
+  return scored[0]?.img.url ?? "";
 }

@@ -74,7 +74,7 @@ function resolveOccasionFromImage(userText: string): Intent | null {
   if (t.includes("work") || t.includes("office") || t.includes("meeting") || t.includes("interview") || t.includes("professional")) return "professional";
   if (t.includes("date") || t.includes("date night") || t.includes("hinge") || t.includes("bumble")) return "date";
   if (t.includes("fall") || t.includes("winter") || t.includes("spring") || t.includes("summer") || t.includes("season")) return "seasonality";
-  if (t.includes("night out") || t.includes("going out") || t.includes("club") || t.includes("concert") || t.includes("party") || t.includes("dinner") || t.includes("brunch") || t.includes("event")) return "social";
+  if (t.includes("night out") || t.includes("going out") || t.includes("club") || t.includes("concert") || t.includes("party") || t.includes("dinner") || t.includes("brunch") || t.includes("event") || t.includes("baby shower") || t.includes("birthday") || t.includes("girls night") || t.includes("rooftop") || t.includes("bbq") || t.includes("cookout") || t.includes("gala")) return "social";
   return null;
 }
 
