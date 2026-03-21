@@ -89,25 +89,20 @@ function StructuredResponse({
                     <OutfitOption key={optIdx} option={option} />
                   ))}
                 </div>
-                {/* Images as a horizontal row after all text */}
+                {/* Inspiration images — shown as a vibe reference, not per-look */}
                 {hasImages && (
-                  <div className="grid grid-cols-2 gap-2 pt-2 sm:grid-cols-3 sm:gap-3">
-                    {section.options.map((option, optIdx) => {
-                      const url = slotImages?.[option.slot - 1] ?? "";
-                      if (!url) return null;
-                      return (
-                        <div key={optIdx}>
-                          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-                            Look {String(option.slot).padStart(2, "0")}
-                          </p>
-                          <img
-                            src={url}
-                            alt={`Look ${option.slot}: ${option.title}`}
-                            className="w-full rounded-xl"
-                          />
-                        </div>
-                      );
-                    })}
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Style Inspo</p>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+                      {(slotImages ?? []).filter(Boolean).map((url, i) => (
+                        <img
+                          key={i}
+                          src={url}
+                          alt="Style inspiration"
+                          className="w-full rounded-xl"
+                        />
+                      ))}
+                    </div>
                   </div>
                 )}
                 <hr className="border-border" />
