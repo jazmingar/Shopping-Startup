@@ -147,16 +147,13 @@ function StructuredResponse({
         }
 
         if (section.key === "verdict" && "content" in section) {
-          const verdictWord = section.content[0]?.trim().replace(/\.$/, "") ?? "";
-          const isYes = verdictWord.toLowerCase() === "yes";
+          const verdict = section.content[0] ?? "";
           const reason = section.content[1] ?? "";
           return (
             <React.Fragment key={idx}>
-              <div className="flex items-start gap-3">
-                <span className={`mt-0.5 text-xl font-bold leading-none ${isYes ? "text-foreground" : "text-destructive"}`}>
-                  {isYes ? "Yes." : "No."}
-                </span>
-                <p className="text-sm leading-relaxed text-muted-foreground">{reason}</p>
+              <div className="space-y-1">
+                <p className="font-semibold text-foreground">{verdict}</p>
+                {reason && <p className="text-sm leading-relaxed text-muted-foreground">{reason}</p>}
               </div>
               <hr className="border-border" />
             </React.Fragment>

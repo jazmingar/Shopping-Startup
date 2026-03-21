@@ -1,110 +1,1002 @@
 [
-  { "id": "tc_001", "persona": "tastemaker", "intent": "date", "userQuery": "First date tonight, dinner in SoHo. What's the move?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_002", "persona": "tastemaker", "intent": "date", "userQuery": "Second date, I want to level it up a bit from last time. Casual bar in the West Village.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_003", "persona": "tastemaker", "intent": "date", "userQuery": "Date at an art gallery opening, I want to look interesting not just pretty.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_004", "persona": "tastemaker", "intent": "date", "userQuery": "Hinge date, coffee then probably a walk. Effortless but put together.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_005", "persona": "tastemaker", "intent": "date", "userQuery": "Anniversary dinner somewhere fancy. I want to look stunning but not like I tried too hard.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_006", "persona": "tastemaker", "intent": "date", "userQuery": "Date in an hour. What do I wear?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_007", "persona": "tastemaker", "intent": "date", "userQuery": "Jazz bar date, sophisticated but not stuffy. Give me a look.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_008", "persona": "tastemaker", "intent": "date", "userQuery": "Beach date in Miami. Cute but functional.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_009", "persona": "tastemaker", "intent": "date", "userQuery": "Rooftop bar date. I want to look like I own the place.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_010", "persona": "tastemaker", "intent": "date", "userQuery": "Date night with my boyfriend, nice restaurant. We've been together two years so I still want to make an effort.", "isWardrobeGap": false, "requires_image": false },
-
-  { "id": "tc_011", "persona": "unsure_dresser", "intent": "date", "userQuery": "I have a first date and I honestly have no idea what to wear. It's dinner.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_012", "persona": "unsure_dresser", "intent": "date", "userQuery": "Going on a date to a nice restaurant. I never know how dressed up to get.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_013", "persona": "unsure_dresser", "intent": "date", "userQuery": "My boyfriend is taking me somewhere nice for our anniversary. I want to look good but I don't really have a style.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_014", "persona": "unsure_dresser", "intent": "date", "userQuery": "First date in a long time and I feel really out of practice. I don't want to look like I tried too hard but I also want to make an effort.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_015", "persona": "unsure_dresser", "intent": "date", "userQuery": "I have a date tomorrow and when I look in my closet everything feels wrong. Help.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_016", "persona": "unsure_dresser", "intent": "date", "userQuery": "How do I dress for a first date without looking overdressed or underdressed? I can never find the middle ground.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_017", "persona": "unsure_dresser", "intent": "date", "userQuery": "Going on a date to a rooftop bar. I don't really go out much so I'm not sure what's appropriate.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_018", "persona": "unsure_dresser", "intent": "date", "userQuery": "I always feel self-conscious on dates. I want to wear something that makes me feel confident but I don't know where to start.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_019", "persona": "unsure_dresser", "intent": "date", "userQuery": "Coffee date, I don't want to look like I over-thought it but I also want to look nice. What do I actually wear?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_020", "persona": "unsure_dresser", "intent": "date", "userQuery": "I met someone and we're going to a jazz bar. I don't really know what that vibe is.", "isWardrobeGap": false, "requires_image": false },
-
-  { "id": "tc_021", "persona": "tastemaker", "intent": "social", "userQuery": "Girls night out in the Meatpacking District. Give me a look.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_022", "persona": "tastemaker", "intent": "social", "userQuery": "Friend's birthday dinner at a cool restaurant. Not a club but elevated.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_023", "persona": "tastemaker", "intent": "social", "userQuery": "Rooftop party Saturday. I want to stand out.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_024", "persona": "tastemaker", "intent": "social", "userQuery": "Concert tonight, EDM, standing venue. What's the move?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_025", "persona": "tastemaker", "intent": "social", "userQuery": "Sunday brunch with the girls. Cute but I'm not trying to be formal.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_026", "persona": "tastemaker", "intent": "social", "userQuery": "NYE party, I want a look that photographs well.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_027", "persona": "tastemaker", "intent": "social", "userQuery": "Pool party in Miami next weekend. Not basic.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_028", "persona": "tastemaker", "intent": "social", "userQuery": "Wedding after party, I already wore something conservative to the ceremony. I want to wear something sexy and fun.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_029", "persona": "tastemaker", "intent": "social", "userQuery": "Industry event, fashion-adjacent crowd. I need to look like I belong.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_030", "persona": "tastemaker", "intent": "social", "userQuery": "Dinner party at a friend's place in Brooklyn. Stylish but low-key.", "isWardrobeGap": false, "requires_image": false },
-
-  { "id": "tc_031", "persona": "unsure_dresser", "intent": "social", "userQuery": "I got invited to a friend's birthday dinner and I have no idea what's appropriate.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_032", "persona": "unsure_dresser", "intent": "social", "userQuery": "I'm going to a party and I always feel either too dressed up or not enough. How do I get it right?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_033", "persona": "unsure_dresser", "intent": "social", "userQuery": "Office holiday party. I don't know what to wear to those things.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_034", "persona": "unsure_dresser", "intent": "social", "userQuery": "I'm a wedding guest and I never know what's appropriate. It's a summer outdoor ceremony.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_035", "persona": "unsure_dresser", "intent": "social", "userQuery": "I got invited to a rooftop event. I don't really go out much, I'm not sure what the vibe is.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_036", "persona": "unsure_dresser", "intent": "social", "userQuery": "Brunch with a new group of people I want to impress. I always second-guess myself.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_037", "persona": "unsure_dresser", "intent": "social", "userQuery": "Going to a concert for the first time in years. What do people even wear to those?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_038", "persona": "unsure_dresser", "intent": "social", "userQuery": "Friend's engagement party. I want to look nice but I don't want to outshine the couple or look boring.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_039", "persona": "unsure_dresser", "intent": "social", "userQuery": "Night out with coworkers after work. I want to look fun but not forget I work with these people.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_040", "persona": "unsure_dresser", "intent": "social", "userQuery": "Summer BBQ at someone's house. I always just wear jeans but I want to look more put together.", "isWardrobeGap": false, "requires_image": false },
-
-  { "id": "tc_041", "persona": "tastemaker", "intent": "work", "userQuery": "Big presentation today. I want to look sharp but still like myself.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_042", "persona": "tastemaker", "intent": "work", "userQuery": "Client meeting at a creative agency. Fashion-forward office, I can have some fun with it.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_043", "persona": "tastemaker", "intent": "work", "userQuery": "First day at a new job. Tech startup, smart casual. I want to make an impression without overdoing it.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_044", "persona": "tastemaker", "intent": "work", "userQuery": "Job interview at a fashion company. I need to look like I get it.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_045", "persona": "tastemaker", "intent": "work", "userQuery": "Office Mondays. I want to look put together but I'm not wearing a blazer every day.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_046", "persona": "tastemaker", "intent": "work", "userQuery": "I'm speaking on a panel. I want to stand out on stage but not look costume-y.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_047", "persona": "tastemaker", "intent": "work", "userQuery": "Networking event after work hours, drinks with industry people. Work to social transition.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_048", "persona": "tastemaker", "intent": "work", "userQuery": "Salary negotiation meeting. I want to feel powerful walking in.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_049", "persona": "tastemaker", "intent": "work", "userQuery": "Work event that goes into the evening. I need one outfit that works for both.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_050", "persona": "tastemaker", "intent": "work", "userQuery": "Meeting clients from Europe. I want to look polished and globally aware.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_051", "persona": "tastemaker", "intent": "work", "userQuery": "Business casual dress code but I'm bored of my usual rotation. Refresh me.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_052", "persona": "tastemaker", "intent": "work", "userQuery": "Conference in another city. I need to look professional all day and go out at night.", "isWardrobeGap": false, "requires_image": false },
-
-  { "id": "tc_053", "persona": "unsure_dresser", "intent": "work", "userQuery": "I don't really understand what business casual means. Can you explain and give me a look?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_054", "persona": "unsure_dresser", "intent": "work", "userQuery": "Starting a new job next week and I'm panicking about what to wear. The dress code says business casual.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_055", "persona": "unsure_dresser", "intent": "work", "userQuery": "I work in an office but I honestly never know what's appropriate. I usually play it safe and end up looking boring.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_056", "persona": "unsure_dresser", "intent": "work", "userQuery": "I have an interview tomorrow and I want to look professional but I don't own many work clothes.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_057", "persona": "unsure_dresser", "intent": "work", "userQuery": "I usually just wear jeans to work. We're having a big meeting with leadership and I want to look more put together.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_058", "persona": "unsure_dresser", "intent": "work", "userQuery": "My office is pretty conservative. I want to look professional but not frumpy.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_059", "persona": "unsure_dresser", "intent": "work", "userQuery": "I got promoted and I feel like I should dress differently now but I don't know how.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_060", "persona": "unsure_dresser", "intent": "work", "userQuery": "Going back into the office after two years of remote work. My work wardrobe feels completely outdated.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_061", "persona": "unsure_dresser", "intent": "work", "userQuery": "I feel frumpy in my work clothes. I want to look more polished without spending a lot or doing a full overhaul.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_062", "persona": "unsure_dresser", "intent": "work", "userQuery": "Smart casual dress code — I genuinely don't know what that means.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_063", "persona": "unsure_dresser", "intent": "work", "userQuery": "I have a work event that goes into the evening. I don't know how to dress for both.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_064", "persona": "unsure_dresser", "intent": "work", "userQuery": "First day at a new job and I have no idea what the office culture is like. How do I play it safe but still look good?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_065", "persona": "unsure_dresser", "intent": "work", "userQuery": "I have a big presentation and I want to feel confident. I don't usually think about what I wear.", "isWardrobeGap": false, "requires_image": false },
-
-  { "id": "tc_066", "persona": "tastemaker", "intent": "vague", "userQuery": "I need a look. Help.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_067", "persona": "tastemaker", "intent": "vague", "userQuery": "What should I wear today?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_068", "persona": "tastemaker", "intent": "vague", "userQuery": "I'm bored with everything in my closet.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_069", "persona": "tastemaker", "intent": "vague", "userQuery": "Give me something fresh.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_070", "persona": "tastemaker", "intent": "vague", "userQuery": "I have plans tonight but I don't know what they are yet.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_071", "persona": "tastemaker", "intent": "vague", "userQuery": "What's trending right now that I should actually be wearing?", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_072", "persona": "tastemaker", "intent": "vague", "userQuery": "I feel like I keep wearing the same three outfits.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_073", "persona": "tastemaker", "intent": "vague", "userQuery": "I want a new look but I don't know what direction to go.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_074", "persona": "unsure_dresser", "intent": "vague", "userQuery": "I don't know what to wear. Like ever.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_075", "persona": "unsure_dresser", "intent": "vague", "userQuery": "I feel like I have no style and I want to change that but I don't know where to start.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_076", "persona": "unsure_dresser", "intent": "vague", "userQuery": "I want to dress better. I just don't know what that means for me.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_077", "persona": "unsure_dresser", "intent": "vague", "userQuery": "Everything in my closet feels wrong but I don't know why.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_078", "persona": "unsure_dresser", "intent": "vague", "userQuery": "I want to feel more confident in what I wear but I don't know where to start.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_079", "persona": "unsure_dresser", "intent": "vague", "userQuery": "Can you help me figure out my style? I genuinely have no idea what it is.", "isWardrobeGap": false, "requires_image": false },
-  { "id": "tc_080", "persona": "unsure_dresser", "intent": "vague", "userQuery": "I always feel like I'm dressed wrong for the occasion, whatever the occasion is.", "isWardrobeGap": false, "requires_image": false },
-
-  { "id": "tc_081", "persona": "tastemaker", "intent": "wardrobe", "userQuery": "Help me figure out what's actually missing from my wardrobe.", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_082", "persona": "tastemaker", "intent": "wardrobe", "userQuery": "I want to build a tighter, more intentional wardrobe. Less but better.", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_083", "persona": "tastemaker", "intent": "wardrobe", "userQuery": "What investment pieces should I actually be buying right now?", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_084", "persona": "tastemaker", "intent": "wardrobe", "userQuery": "I want a wardrobe that works for both work and going out without duplicating everything.", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_085", "persona": "tastemaker", "intent": "wardrobe", "userQuery": "I want to dress more minimally. What should I keep and what should go?", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_086", "persona": "unsure_dresser", "intent": "wardrobe", "userQuery": "I feel like I have a lot of clothes but nothing to wear. What am I doing wrong?", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_087", "persona": "unsure_dresser", "intent": "wardrobe", "userQuery": "I want to start building a proper wardrobe but I don't know what the basics actually are.", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_088", "persona": "unsure_dresser", "intent": "wardrobe", "userQuery": "I want to do a wardrobe overhaul but it feels overwhelming. Where do I even start?", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_089", "persona": "unsure_dresser", "intent": "wardrobe", "userQuery": "I want to dress better but I don't know what to buy. I always make the wrong choices.", "isWardrobeGap": true, "requires_image": false },
-  { "id": "tc_090", "persona": "unsure_dresser", "intent": "wardrobe", "userQuery": "My wardrobe is a mess and nothing goes together. I need someone to help me think through it.", "isWardrobeGap": true, "requires_image": false },
-
-  { "id": "tc_091", "persona": "tastemaker", "intent": "date", "userQuery": "Thinking of wearing this tonight for a date. Thoughts?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Casual outfit — jeans and a nice top" },
-  { "id": "tc_092", "persona": "tastemaker", "intent": "social", "userQuery": "Is this going to work for a rooftop party?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Dressy outfit — midi dress" },
-  { "id": "tc_093", "persona": "tastemaker", "intent": "work", "userQuery": "Would I get away with wearing this to a client meeting?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Business casual — blazer and trousers" },
-  { "id": "tc_094", "persona": "tastemaker", "intent": "vague", "userQuery": "What do you think?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Vague prompt — should trigger clarifying question" },
-  { "id": "tc_095", "persona": "tastemaker", "intent": "social", "userQuery": "Rate this outfit.", "isWardrobeGap": false, "requires_image": true, "image_notes": "Vague prompt — should trigger clarifying question" },
-  { "id": "tc_096", "persona": "unsure_dresser", "intent": "date", "userQuery": "I was thinking of wearing this on a first date, is it okay?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Safe casual outfit" },
-  { "id": "tc_097", "persona": "unsure_dresser", "intent": "work", "userQuery": "Is this appropriate for the office?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Borderline casual — could go either way" },
-  { "id": "tc_098", "persona": "unsure_dresser", "intent": "social", "userQuery": "I was going to wear this to a wedding. Is it too much or not enough?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Wedding guest outfit" },
-  { "id": "tc_099", "persona": "unsure_dresser", "intent": "vague", "userQuery": "Does this look good?", "isWardrobeGap": false, "requires_image": true, "image_notes": "Vague prompt — should trigger clarifying question" },
-  { "id": "tc_100", "persona": "unsure_dresser", "intent": "vague", "userQuery": "I don't know if this works.", "isWardrobeGap": false, "requires_image": true, "image_notes": "Vague prompt — should trigger clarifying question" }
+  {
+    "id": "tc_001",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "First date tonight, dinner in SoHo. What's the move?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_002",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Second date, I want to level it up a bit from last time. Casual bar in the West Village.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_003",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Date at an art gallery opening, I want to look interesting not just pretty.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_004",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Hinge date, coffee then probably a walk. Effortless but put together.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_005",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Anniversary dinner somewhere fancy. I want to look stunning but not like I tried too hard.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_006",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Date in an hour. What do I wear?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_007",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Jazz bar date, sophisticated but not stuffy. Give me a look.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_008",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Beach date in Miami. Cute but functional.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_009",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Rooftop bar date. I want to look like I own the place.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_010",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Date night with my boyfriend, nice restaurant. We've been together two years so I still want to make an effort.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_011",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I have a first date and I honestly have no idea what to wear. It's dinner.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_012",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "Going on a date to a nice restaurant. I never know how dressed up to get.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_013",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "My boyfriend is taking me somewhere nice for our anniversary. I want to look good but I don't really have a style.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_014",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "First date in a long time and I feel really out of practice. I don't want to look like I tried too hard but I also want to make an effort.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_015",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I have a date tomorrow and when I look in my closet everything feels wrong. Help.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_016",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "How do I dress for a first date without looking overdressed or underdressed? I can never find the middle ground.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_017",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "Going on a date to a rooftop bar. I don't really go out much so I'm not sure what's appropriate.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_018",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I always feel self-conscious on dates. I want to wear something that makes me feel confident but I don't know where to start.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_019",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "Coffee date, I don't want to look like I over-thought it but I also want to look nice. What do I actually wear?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_020",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I met someone and we're going to a jazz bar. I don't really know what that vibe is.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_021",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Girls night out in the Meatpacking District. Give me a look.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_022",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Friend's birthday dinner at a cool restaurant. Not a club but elevated.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_023",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Rooftop party Saturday. I want to stand out.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_024",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Concert tonight, EDM, standing venue. What's the move?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_025",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Sunday brunch with the girls. Cute but I'm not trying to be formal.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_026",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "NYE party, I want a look that photographs well.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_027",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Pool party in Miami next weekend. Not basic.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_028",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Wedding after party, I already wore something conservative to the ceremony. I want to wear something sexy and fun.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_029",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Industry event, fashion-adjacent crowd. I need to look like I belong.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_030",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Dinner party at a friend's place in Brooklyn. Stylish but low-key.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_031",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "I got invited to a friend's birthday dinner and I have no idea what's appropriate.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_032",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "I'm going to a party and I always feel either too dressed up or not enough. How do I get it right?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_033",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "Office holiday party. I don't know what to wear to those things.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_034",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "I'm a wedding guest and I never know what's appropriate. It's a summer outdoor ceremony.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_035",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "I got invited to a rooftop event. I don't really go out much, I'm not sure what the vibe is.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_036",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "Brunch with a new group of people I want to impress. I always second-guess myself.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_037",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "Going to a concert for the first time in years. What do people even wear to those?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_038",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "Friend's engagement party. I want to look nice but I don't want to outshine the couple or look boring.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_039",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "Night out with coworkers after work. I want to look fun but not forget I work with these people.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_040",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "Summer BBQ at someone's house. I always just wear jeans but I want to look more put together.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_041",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Big presentation today. I want to look sharp but still like myself.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_042",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Client meeting at a creative agency. Fashion-forward office, I can have some fun with it.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_043",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "First day at a new job. Tech startup, smart casual. I want to make an impression without overdoing it.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_044",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Job interview at a fashion company. I need to look like I get it.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_045",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Office Mondays. I want to look put together but I'm not wearing a blazer every day.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_046",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "I'm speaking on a panel. I want to stand out on stage but not look costume-y.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_047",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Networking event after work hours, drinks with industry people. Work to social transition.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_048",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Salary negotiation meeting. I want to feel powerful walking in.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_049",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Work event that goes into the evening. I need one outfit that works for both.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_050",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Meeting clients from Europe. I want to look polished and globally aware.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_051",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Business casual dress code but I'm bored of my usual rotation. Refresh me.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_052",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Conference in another city. I need to look professional all day and go out at night.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_053",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I don't really understand what business casual means. Can you explain and give me a look?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_054",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "Starting a new job next week and I'm panicking about what to wear. The dress code says business casual.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_055",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I work in an office but I honestly never know what's appropriate. I usually play it safe and end up looking boring.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_056",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I have an interview tomorrow and I want to look professional but I don't own many work clothes.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_057",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I usually just wear jeans to work. We're having a big meeting with leadership and I want to look more put together.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_058",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "My office is pretty conservative. I want to look professional but not frumpy.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_059",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I got promoted and I feel like I should dress differently now but I don't know how.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_060",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "Going back into the office after two years of remote work. My work wardrobe feels completely outdated.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_061",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I feel frumpy in my work clothes. I want to look more polished without spending a lot or doing a full overhaul.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_062",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "Smart casual dress code — I genuinely don't know what that means.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_063",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I have a work event that goes into the evening. I don't know how to dress for both.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_064",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "First day at a new job and I have no idea what the office culture is like. How do I play it safe but still look good?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_065",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "I have a big presentation and I want to feel confident. I don't usually think about what I wear.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ3"
+  },
+  {
+    "id": "tc_066",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "I need a look. Help.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_067",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "What should I wear today?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_068",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "I'm bored with everything in my closet.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_069",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "Give me something fresh.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_070",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "I have plans tonight but I don't know what they are yet.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_071",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "What's trending right now that I should actually be wearing?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_072",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "I feel like I keep wearing the same three outfits.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_073",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "I want a new look but I don't know what direction to go.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_074",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "I don't know what to wear. Like ever.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_075",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "I feel like I have no style and I want to change that but I don't know where to start.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_076",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "I want to dress better. I just don't know what that means for me.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_077",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "Everything in my closet feels wrong but I don't know why.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_078",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "I want to feel more confident in what I wear but I don't know where to start.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_079",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "Can you help me figure out my style? I genuinely have no idea what it is.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_080",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "I always feel like I'm dressed wrong for the occasion, whatever the occasion is.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P1-CUJ6"
+  },
+  {
+    "id": "tc_081",
+    "persona": "tastemaker",
+    "intent": "wardrobe",
+    "userQuery": "Help me figure out what's actually missing from my wardrobe.",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_082",
+    "persona": "tastemaker",
+    "intent": "wardrobe",
+    "userQuery": "I want to build a tighter, more intentional wardrobe. Less but better.",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_083",
+    "persona": "tastemaker",
+    "intent": "wardrobe",
+    "userQuery": "What investment pieces should I actually be buying right now?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_084",
+    "persona": "tastemaker",
+    "intent": "wardrobe",
+    "userQuery": "I want a wardrobe that works for both work and going out without duplicating everything.",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_085",
+    "persona": "tastemaker",
+    "intent": "wardrobe",
+    "userQuery": "I want to dress more minimally. What should I keep and what should go?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_086",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "I feel like I have a lot of clothes but nothing to wear. What am I doing wrong?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_087",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "I want to start building a proper wardrobe but I don't know what the basics actually are.",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_088",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "I want to do a wardrobe overhaul but it feels overwhelming. Where do I even start?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_089",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "I want to dress better but I don't know what to buy. I always make the wrong choices.",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_090",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "My wardrobe is a mess and nothing goes together. I need someone to help me think through it.",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_091",
+    "persona": "tastemaker",
+    "intent": "date",
+    "userQuery": "Thinking of wearing this tonight for a date. Thoughts?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Casual outfit — jeans and a nice top",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_092",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Is this going to work for a rooftop party?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Dressy outfit — midi dress",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_093",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "Would I get away with wearing this to a client meeting?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Business casual — blazer and trousers",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_094",
+    "persona": "tastemaker",
+    "intent": "vague",
+    "userQuery": "What do you think?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Vague prompt — should trigger clarifying question",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_095",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "Rate this outfit.",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Vague prompt — should trigger clarifying question",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_096",
+    "persona": "unsure_dresser",
+    "intent": "date",
+    "userQuery": "I was thinking of wearing this on a first date, is it okay?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Safe casual outfit",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_097",
+    "persona": "unsure_dresser",
+    "intent": "work",
+    "userQuery": "Is this appropriate for the office?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Borderline casual — could go either way",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_098",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "I was going to wear this to a wedding. Is it too much or not enough?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Wedding guest outfit",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_099",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "Does this look good?",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Vague prompt — should trigger clarifying question",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_100",
+    "persona": "unsure_dresser",
+    "intent": "vague",
+    "userQuery": "I don't know if this works.",
+    "isWardrobeGap": false,
+    "requires_image": true,
+    "image_notes": "Vague prompt — should trigger clarifying question",
+    "cuj": "P0-CUJ1"
+  },
+  {
+    "id": "tc_101",
+    "persona": "tastemaker",
+    "intent": "social",
+    "userQuery": "I have a gala in three weeks. Help me plan a full look.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ4"
+  },
+  {
+    "id": "tc_102",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "I'm going to a wedding in the Hamptons next month and I have no idea what to wear. I need help planning something.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ4"
+  },
+  {
+    "id": "tc_103",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "I have a speaking engagement at a big conference in two weeks. I want to plan an outfit that photographs well on stage.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ4"
+  },
+  {
+    "id": "tc_104",
+    "persona": "unsure_dresser",
+    "intent": "social",
+    "userQuery": "My friend's bachelorette is in Nashville in a month. What's the vibe and what should I wear?",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ4"
+  },
+  {
+    "id": "tc_105",
+    "persona": "tastemaker",
+    "intent": "work",
+    "userQuery": "I have a series of back-to-back client meetings over two days next week. Help me plan outfits I can rotate.",
+    "isWardrobeGap": false,
+    "requires_image": false,
+    "cuj": "P0-CUJ4"
+  },
+  {
+    "id": "tc_106",
+    "persona": "tastemaker",
+    "intent": "wardrobe",
+    "userQuery": "I want to go through my closet piece by piece. Can we start with what I actually need for going out?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_107",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "I have a white button-down, a trench coat, black leather pants, and a blazer. What am I missing to make real outfits out of these?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_108",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "I want to audit my going-out clothes. I feel like none of them work anymore. Where do I start?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_109",
+    "persona": "tastemaker",
+    "intent": "wardrobe",
+    "userQuery": "I have too many clothes and I want to edit down. Help me think about what's worth keeping.",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  },
+  {
+    "id": "tc_110",
+    "persona": "unsure_dresser",
+    "intent": "wardrobe",
+    "userQuery": "I literally never wear half of what I own. Can you help me figure out why and what to do about it?",
+    "isWardrobeGap": true,
+    "requires_image": false,
+    "cuj": "P0-CUJ5"
+  }
 ]

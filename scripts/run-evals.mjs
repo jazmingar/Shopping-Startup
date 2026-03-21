@@ -22,7 +22,9 @@ if (!BASE_URL) {
 }
 
 const testCases = JSON.parse(fs.readFileSync(path.join(ROOT, "evals/test-cases.json"), "utf8"));
-const runnable = testCases.filter((tc) => !tc.requires_image);
+const limitArg = process.argv.find(a => a.startsWith("--limit="));
+const limit = limitArg ? parseInt(limitArg.split("=")[1]) : undefined;
+const runnable = testCases.filter((tc) => !tc.requires_image).slice(0, limit);
 
 console.log(`Running ${runnable.length} test cases against ${BASE_URL}\n`);
 

@@ -1,5 +1,34 @@
 import type { Intent } from "@/lib/intent-structures";
 
+export type TimeHorizon = "now" | "planning";
+
+/**
+ * Detects whether the user has time to shop or needs to work with what they own.
+ * Defaults to "now" (closet-first) when no signal is found — most styling
+ * questions are immediate.
+ */
+export function detectTimeHorizon(userText: string): TimeHorizon {
+  const t = normalize(userText);
+
+  // Planning signals — event is far enough away to shop
+  if (
+    t.match(/\bin (\d+ )?(few )?(week|month|day)s?\b/) ||
+    t.match(/\bnext (week|month|season|year)\b/) ||
+    t.includes("upcoming") ||
+    t.includes("planning") ||
+    t.includes("help me plan") ||
+    t.includes("in a few") ||
+    t.includes("want to shop") ||
+    t.includes("looking to buy") ||
+    t.includes("want to find") ||
+    t.includes("time to shop") ||
+    t.includes("have time")
+  )
+    return "planning";
+
+  return "now";
+}
+
 export function normalize(text: string) {
   return text.toLowerCase().replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
 }

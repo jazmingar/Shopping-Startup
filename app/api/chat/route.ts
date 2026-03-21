@@ -24,6 +24,8 @@ Work: polo midi/maxi dress; dark jeans + blazer; monochromatic trousers + blouse
 Vague prompt: warm energetic opener, ask what occasion.
 Turtleneck/knit for dinner: works weekday. Weekend → suggest mockneck bodysuit instead.
 Cold weather (<40F): acknowledge it, lead with warmth — coats, layers, closed-toe shoes.
+Dinner with friends (social, no other context): ask "Is this a weekday or weekend dinner?" before showing looks — the vibe is very different.
+Responses should be concise and momentum-friendly. User may be cycling through multiple outfits. No long paragraphs between looks.
 `,
   "hype-bestie": `
 You are "The Shopping Bestie"—the user's most fashionable friend.
@@ -200,6 +202,7 @@ export async function POST(req: Request) {
       isWardrobeGap ? "wardrobe_gap" : effectiveMode === "refine" ? "followup" : "initial";
 
     const journeyStage: string = payload?.journeyStage || "exploring";
+    const timeHorizon: "now" | "planning" = payload?.timeHorizon === "planning" ? "planning" : "now";
 
     // Optional userContext (keep small to control tokens)
     const userContext = payload?.userContext as
@@ -293,18 +296,15 @@ if (isImageUpload && imageOccasion) {
   const outfitFeedbackSystem = [
     personaSystem.trim(),
     "",
-    "IMAGE ANALYSIS MODE:",
-    "The user has shared a photo of an outfit and wants your honest stylist opinion.",
-    "Your job: make a clear call — does this work or not — then explain why.",
+    "IMAGE ANALYSIS MODE — fast, direct, momentum-friendly. The user may be cycling through multiple outfits. Keep responses short.",
     "",
     "FEEDBACK RULES:",
-    "- Lead with a verdict. 'Yes' if the outfit works for the occasion. 'No' if it doesn't. Do not hedge.",
-    "- The verdict must be a single word: 'Yes.' or 'No.' Nothing in between.",
-    "- If Yes: briefly explain what makes it work, then note one thing that would elevate it further.",
-    "- If No: be direct but kind. Tell them exactly what the problem is (proportion, occasion mismatch, color, fit) and give one concrete fix.",
-    "- Be specific — reference actual elements from the image, not generic advice.",
-    "- Do NOT default to recommendations or suggest alternative outfits unless the outfit clearly doesn't work.",
-    "Return VALID JSON only. No markdown. No extra commentary.",
+    "- Approved: verdict[0] = 'Love this.' Verdict[1] = 1-2 sentences on why it works. Style notes: 1-2 specific observations max.",
+    "- Not approved: verdict[0] = 'I\\'d go with something else.' Verdict[1] = one sentence on the specific issue (fit, occasion, proportion, color). Style notes: exactly 2 alternative outfit recommendations — specific pieces, not general advice.",
+    "- Be specific — reference actual elements from the image.",
+    "- Do NOT comment on nails. Do not suggest a belt.",
+    "- Never mention brands or budget.",
+    "Return VALID JSON only. No markdown.",
     "",
     `OUTPUT CONTRACT:
 {
@@ -312,12 +312,11 @@ if (isImageUpload && imageOccasion) {
   "intent": "${imageOccasion}",
   "title": "Outfit Read",
   "sections": [
-    { "key": "verdict", "content": ["Yes." or "No.", "One sentence: the core reason for your verdict."] },
-    { "key": "style_notes", "content": ["Specific observation about what works or what the issue is.", "One concrete thing to change or add.", "Optional third note — only if genuinely useful."] },
-    { "key": "next_questions", "content": ["One follow-up question or suggestion that moves the conversation forward."] }
+    { "key": "verdict", "content": ["Love this." or "I'd go with something else.", "One sentence reason."] },
+    { "key": "style_notes", "content": ["Max 2 items. If approved: what works + one elevating detail. If not: 2 specific alternative outfit ideas."] },
+    { "key": "next_questions", "content": ["One short forward-moving question. Omit if the outfit was approved and context is clear."] }
   ]
 }`,
-    "RULES: Never mention brands. Never mention budget. Keep style_notes to 2-3 items. Do not comment on nails. Do not suggest adding a belt as a styling solution.",
   ].join("\n");
 
   const convHistory = Array.isArray(payload?.conversationHistory) ? payload.conversationHistory : [];
@@ -413,6 +412,10 @@ if (!resolvedIntent) {
     };
     const journeyDirective = journeyToneMap[journeyStage] ?? journeyToneMap["exploring"];
 
+    const timeHorizonDirective = timeHorizon === "planning"
+      ? "SHOPPING MODE: The user has time before their event — shopping recommendations are in scope. You may suggest specific pieces to look for or buy. Frame advice as 'look for...' or 'this is worth investing in'."
+      : "CLOSET-FIRST MODE: The user needs an outfit now or soon — assume they're working with what they already own. Do not suggest shopping or buying new pieces. Build looks from what they likely have.";
+
     // Add a small hard reminder at the system-level too (belt + suspenders)
     const hardContractReminder = `
 HARD REMINDER:
@@ -420,7 +423,7 @@ HARD REMINDER:
 - If responseType is "followup", DO NOT output any "options" arrays anywhere.
 `.trim();
 
-    const systemMessage = [personaSystem.trim(), journeyDirective, SEASONAL_TRENDS, intentSystem.trim(), hardContractReminder].join(
+    const systemMessage = [personaSystem.trim(), journeyDirective, timeHorizonDirective, SEASONAL_TRENDS, intentSystem.trim(), hardContractReminder].join(
       "\n\n"
     );
 

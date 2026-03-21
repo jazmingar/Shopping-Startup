@@ -49,6 +49,7 @@ const FAILURE_CATEGORIES = "tone_off | too_hedged | generic_advice | wrong_inten
 
 const headers = [
   "id",
+  "cuj",
   "persona",
   "intent",
   "user_query",
@@ -64,6 +65,7 @@ const headers = [
 
 const rows = results.map((r) => [
   r.id,
+  r.cuj || "",
   r.persona,
   r.intent,
   r.userQuery,

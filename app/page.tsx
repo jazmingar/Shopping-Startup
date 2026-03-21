@@ -14,7 +14,7 @@ import {
   getCityAesthetic,
 } from "@/lib/location";
 import { fetchWeatherByCoords, fetchWeatherByLocation } from "@/lib/weather";
-import { resolveIntentFromText } from "@/lib/resolve-intent";
+import { resolveIntentFromText, detectTimeHorizon } from "@/lib/resolve-intent";
 import { Onboarding } from "@/components/onboarding";
 import {
   hasCompletedOnboarding,
@@ -252,6 +252,7 @@ export default function Home() {
     // Only treat as refine if options have been shown AND the new message doesn't
     // resolve to a different intent — otherwise it's a new thread, start fresh.
     const newIntent = resolveIntentFromText(content);
+    const timeHorizon = detectTimeHorizon(content);
     const isNewThread = !!newIntent && newIntent !== lastKnownIntent;
     const isFollowup = hasShownOptions() && !isNewThread;
     const focusSlot = isFollowup ? detectOptionSlot(content) : null;
@@ -379,6 +380,7 @@ export default function Home() {
             styleProfile: styleProfile ? formatStyleProfileForPrompt(styleProfile) : undefined,
           },
           journeyStage,
+          timeHorizon,
         }),
       });
 
