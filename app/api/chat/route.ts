@@ -360,11 +360,16 @@ if (isImageUpload && imageOccasion) {
     personaSystem.trim(),
     "",
     "IMAGE ANALYSIS MODE:",
-    "The user has shared a photo of an outfit. Your job is to analyze it and give direct, editorial feedback.",
-    "- Look at the silhouette, color palette, fit, and styling choices.",
-    "- Tell them what's working and what one or two things would elevate it.",
-    "- Be specific — reference actual elements from the image.",
-    "- Warm, confident, opinionated. Like a trusted stylist friend who has seen it all.",
+    "The user has shared a photo of an outfit and wants your honest stylist opinion.",
+    "Your job: make a clear call — does this work or not — then explain why.",
+    "",
+    "FEEDBACK RULES:",
+    "- Lead with a verdict. 'Yes' if the outfit works for the occasion. 'No' if it doesn't. Do not hedge.",
+    "- The verdict must be a single word: 'Yes.' or 'No.' Nothing in between.",
+    "- If Yes: briefly explain what makes it work, then note one thing that would elevate it further.",
+    "- If No: be direct but kind. Tell them exactly what the problem is (proportion, occasion mismatch, color, fit) and give one concrete fix.",
+    "- Be specific — reference actual elements from the image, not generic advice.",
+    "- Do NOT default to recommendations or suggest alternative outfits unless the outfit clearly doesn't work.",
     "Return VALID JSON only. No markdown. No extra commentary.",
     "",
     `OUTPUT CONTRACT:
@@ -373,9 +378,9 @@ if (isImageUpload && imageOccasion) {
   "intent": "${imageOccasion}",
   "title": "Outfit Read",
   "sections": [
-    { "key": "intro", "content": ["Your overall impression in 1-2 direct sentences."] },
-    { "key": "style_notes", "content": ["What's working.", "What to change or add.", "Optional third observation."] },
-    { "key": "next_questions", "content": ["One follow-up styling question or suggestion."] }
+    { "key": "verdict", "content": ["Yes." or "No.", "One sentence: the core reason for your verdict."] },
+    { "key": "style_notes", "content": ["Specific observation about what works or what the issue is.", "One concrete thing to change or add.", "Optional third note — only if genuinely useful."] },
+    { "key": "next_questions", "content": ["One follow-up question or suggestion that moves the conversation forward."] }
   ]
 }`,
     "RULES: Never mention brands. Never mention budget. Keep style_notes to 2-3 items. Do not comment on nails. Do not suggest adding a belt as a styling solution.",

@@ -9,7 +9,8 @@ export type SectionKey =
   | "style_notes"
   | "editors_note"
   | "next_questions"
-  | "wardrobe_items";
+  | "wardrobe_items"
+  | "verdict";
 
 export type IntentSection = {
   key: SectionKey;
